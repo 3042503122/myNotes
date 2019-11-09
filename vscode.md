@@ -41,6 +41,8 @@ vscode中用于生成文件头部注释和函数注释的插件
 
 **在光标处添加函数注释**: ctrl + alt + t
 
+
+
 ###  ★★★★★ES7 React/Redux/GraphQL/React-Native snippets
 
 <https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets>
@@ -49,32 +51,32 @@ vscode中用于生成文件头部注释和函数注释的插件
 
 **Basic Methods**
 
-|  Prefix | Method                                              |
-| ------: | --------------------------------------------------- |
-|  `imp→` | `import moduleName from 'module'`                   |
-|  `imn→` | `import 'module'`                                   |
-|  `imd→` | `import { destructuredModule } from 'module'`       |
-|  `ime→` | `import * as alias from 'module'`                   |
-|  `ima→` | `import { originalName as aliasName} from 'module'` |
-|  `exp→` | `export default moduleName`                         |
-|  `exd→` | `export { destructuredModule } from 'module'`       |
-|  `exa→` | `export { originalName as aliasName} from 'module'` |
-|  `enf→` | `export const functionName = (params) => { }`       |
-|  `edf→` | `export default (params) => { }`                    |
-|  `met→` | `methodName = (params) => { }`                      |
-|  `fre→` | `arrayName.forEach(element => { }`                  |
-|  `fof→` | `for(let itemName of objectName { }`                |
-|  `fin→` | `for(let itemName in objectName { }`                |
-| `anfn→` | `(params) => { }`                                   |
-|  `nfn→` | `const functionName = (params) => { }`              |
-|  `dob→` | `const {propName} = objectToDescruct`               |
-|  `dar→` | `const [propName] = arrayToDescruct`                |
-|  `sti→` | `setInterval(() => { }, intervalTime`               |
-|  `sto→` | `setTimeout(() => { }, delayTime`                   |
-| `prom→` | `return new Promise((resolve, reject) => { }`       |
-| `cmmb→` | `comment block`                                     |
-|   `cp→` | `const { } = this.props`                            |
-|   `cs→` | `const { } = this.state`                            |
+|    Prefix | Method                                              |
+| --------: | --------------------------------------------------- |
+|  **imp→** | `import moduleName from 'module'`                   |
+|  **imn→** | `import 'module'`                                   |
+|  **imd→** | `import { destructuredModule } from 'module'`       |
+|    `ime→` | `import * as alias from 'module'`                   |
+|    `ima→` | `import { originalName as aliasName} from 'module'` |
+|    `exp→` | `export default moduleName`                         |
+|    `exd→` | `export { destructuredModule } from 'module'`       |
+|    `exa→` | `export { originalName as aliasName} from 'module'` |
+|    `enf→` | `export const functionName = (params) => { }`       |
+|    `edf→` | `export default (params) => { }`                    |
+|    `met→` | `methodName = (params) => { }`                      |
+|    `fre→` | `arrayName.forEach(element => { }`                  |
+|  **fof→** | `for(let itemName of objectName { }`                |
+|    `fin→` | `for(let itemName in objectName { }`                |
+|   `anfn→` | `(params) => { }`                                   |
+|    `nfn→` | `const functionName = (params) => { }`              |
+|  **dob→** | `const {propName} = objectToDescruct`               |
+|  **dar→** | `const [propName] = arrayToDescruct`                |
+|    `sti→` | `setInterval(() => { }, intervalTime`               |
+|    `sto→` | `setTimeout(() => { }, delayTime`                   |
+| **prom→** | `return new Promise((resolve, reject) => { }`       |
+|   `cmmb→` | `comment block`                                     |
+|   **cp→** | `const { } = this.props`                            |
+|   **cs→** | `const { } = this.state`                            |
 
 **React**
 
@@ -84,7 +86,7 @@ vscode中用于生成文件头部注释和函数注释的插件
 |     `imrd→` | `import ReactDOM from 'react-dom'`                           |
 |     `imrc→` | `import React, { Component } from 'react'`                   |
 |    `imrcp→` | `import React, { Component } from 'react' & import PropTypes from 'prop-types'` |
-|    `imrpc→` | `import React, { PureComponent } from 'react'`               |
+|  **imrpc→** | `import React, { PureComponent } from 'react'`               |
 |   `imrpcp→` | `import React, { PureComponent } from 'react' & import PropTypes from 'prop-types'` |
 |     `imrm→` | `import React, { memo } from 'react'`                        |
 |    `imrmp→` | `import React, { memo } from 'react' & import PropTypes from 'prop-types'` |
@@ -103,15 +105,72 @@ vscode中用于生成文件头部注释和函数注释的插件
 |     `cwun→` | `componentWillUnmount = () => { }`                           |
 |    `gdsfp→` | `static getDerivedStateFromProps(nextProps, prevState) { }`  |
 |     `gsbu→` | `getSnapshotBeforeUpdate = (prevProps, prevState) => { }`    |
-|      `ren→` | `render() { return( ) }`                                     |
-|      `sst→` | `this.setState({ })`                                         |
-|      `ssf→` | `this.setState((state, props) => return { })`                |
-|    `props→` | `this.props.propName`                                        |
-|    `state→` | `this.state.stateName`                                       |
+|    **ren→** | `render() { return( ) }`                                     |
+|    **sst→** | `this.setState({ })`                                         |
+|    **ssf→** | `this.setState((state, props) => return { })`                |
+|  **props→** | `this.props.propName`                                        |
+|  **state**→ | `this.state.stateName`                                       |
 | `rcontext→` | `const ${1:contextName} = React.createContext()`             |
 |     `cref→` | `this.${1:refName}Ref = React.createRef()`                   |
 |     `fref→` | `const ref = React.createRef()`                              |
 |      `bnd→` | `this.methodName = this.methodName.bind(this)`               |
+
+#### `rcredux`
+
+```javascript
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+export class FileName extends Component {
+  render() {
+    return <div>$4</div>
+  }
+}
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = {}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FileName)
+```
+
+#### `rcreduxp`
+
+```javascript
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+export class FileName extends Component {
+  static propTypes = {
+    $2: $3
+  }
+
+  render() {
+    return <div>$4</div>
+  }
+}
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = {}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FileName)
+```
+
+#### `reduxmap`
+
+```javascript
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = {}
+```
 
 
 
@@ -188,3 +247,30 @@ Live Share` 画板支持,这下子不仅代码能协作,思路也能演示了
 代码协作,会使用上面这个插件的小伙伴,肯定也会用这个插件
 
 [VS Live Share](https://link.juejin.im/?target=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3DMS-vsliveshare.vsliveshare) 
+
+
+
+
+
+# FAQ
+
+## 保存自动生成文件头注释，怎么关闭
+
+- 原因：vscode更新后保存，头部自动生成如下description，怎么关闭
+
+![](E:\self\记录\myNotes\images\vscode.png)
+
+- 解决
+
+vscode  settings.json
+
+```
+"fileheader.configObj": {
+  "autoAdd": false, 
+}
+```
+
+[ api ](https://segmentfault.com/q/1010000020030748/a-1020000020078356)
+
+[ api ](https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE)
+

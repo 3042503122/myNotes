@@ -1,3 +1,13 @@
+# react迭代项目入手
+
+## 步骤
+
+- 启动项目
+
+  看package.json 启动项目
+
+
+
 
 
 # api
@@ -908,7 +918,7 @@ handleClick() {
 
 ### 介绍
 
-![](E:\self\mahongluRecord\notes\rn\react_2.png)
+![](E:\self\记录\myNotes\rn\react_2.png)
 
 #### Mounting(挂载即组件第一次被放到页面)
 
@@ -1110,6 +1120,14 @@ npm install react-transition-group --save
 
 
 
+# react高阶组件
+
+# react-dnd
+
+[react-dnd 用法详解](https://juejin.im/post/5c92e7fc6fb9a070e5529322)
+
+[官方案例翻译](https://juejin.im/post/5aebbdedf265da0ba469a56f)
+
 # 开发中其他第三方模块
 
 ## ajax请求
@@ -1151,6 +1169,8 @@ yarn add react-redux
 
 
 ## 基本流程
+
+![](E:\self\myNotes\rn\redux_1.png)
 
 > action creators
 
@@ -1220,12 +1240,42 @@ import thunk from 'redux-thunk';
 
 
 
+### 2. redux-logger
+
+[api](https://github.com/LogRocket/redux-logger)
+
+### 3. redux-saga
+
+可以完全替代redux-thunk
+
+[api](https://github.com/superRaytin/redux-saga-in-chinese)
+
+
+
+
+
+# dva
+
+基于 [redux](https://github.com/reactjs/redux)、[redux-saga](https://github.com/redux-saga/redux-saga) 和 [react-router](https://github.com/ReactTraining/react-router) 的轻量级前端框架。
+
+
+
+
+
+
+
+## mock
+
+[ api ](https://umijs.org/zh/guide/app-structure.html#mock)
+
+
+
 # 调试工具
 
 - chrome浏览器react developer tools
 
 
-- chrome浏览器react developer devTools
+- chrome浏览器Redux DevTools
 
   [配置](https://github.com/zalmoxisus/redux-devtools-extension#installation)
 

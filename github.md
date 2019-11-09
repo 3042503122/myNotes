@@ -99,3 +99,17 @@ https://www.cnblogs.com/chuyanfenfei/p/8035067.html
 2. delete
 
    ![](E:\self\mahongluRecord\notes\images\github_2.png)
+
+# 新建仓库将项目
+
+### 推送现有空的存储库
+
+建好空的仓库：https://coding.jd.com/mahonglu/cshop4B.git
+
+在项目文件夹里面执行下列命令
+
+git init 
+git remote add origin https://coding.jd.com/mahonglu/cshop4B.git 
+git add . 
+git commit -m "Initial commit" 
+git push -u origin master 

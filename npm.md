@@ -1,21 +1,40 @@
 # yarn
 
-和npm  类似
+[api](https://yarnpkg.com/en/docs/cli/create)
 
-```
-yarn install
-```
+[参考](https://www.jianshu.com/p/35008b80f698)
 
+- `npm install` === `yarn` —— install安装是默认行为
+- `npm install taco --save` === `yarn add taco` —— taco包立即被保存到 `package.json` 中。
+- `npm uninstall taco --save` === `yarn remove taco`
+- `npm install taco --save-dev` === `yarn add taco --dev`
+- `npm update --save` === `yarn upgrade`
 
+\-
 
-yarn 执行scripts：(不用run)
+- `npm install taco@latest --save` === `yarn add taco`
+- `npm install taco --global` === `yarn global add taco` —— 一如既往，请谨慎使用 global 标记。
 
-```
-yarn start //npm run start
-yarn build //npm run build
-```
+> 注意：使用yarn或yarn install安装全部依赖时是根据package.json里的”dependencies”字段来决定的
 
+\-
 
+- `npm init` === `yarn init`
+- `npm init --yes/-y` === `yarn init --yes/-y`
+- `npm link` === `yarn link`
+- `npm outdated` === `yarn outdated`
+- `npm publish` === `yarn publish`
+- `npm run` === `yarn run`
+- `npm cache clean` === `yarn cache clean`
+- `npm login` === `yarn login`
+- `npm test` === `yarn test`
+
+## Yarn 独有的命令
+
+- `yarn licenses ls` —— 允许你检查依赖的许可信息
+- `yarn licenses generate` —— 自动创建依赖免责声明 license
+- `yarn why taco` —— 检查为什么会安装 taco，详细列出依赖它的其他包
+- `yarn why vuepress` —— 检查为什么会安装 vuepress，详细列出依赖它的其他包
 
 # npm install
 
@@ -104,7 +123,7 @@ npm ls --depth=0
 
 # 报错：npm ERR! code EPERM npm ERR! errno -4048
 
-![](E:\self\mahongluRecord\notes\images\npm_1.png)
+![](E:\self\记录\myNotes\images\npm_1.png)
 
 ## step1: 清除[npm](https://www.baidu.com/s?wd=npm&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd)缓存
 

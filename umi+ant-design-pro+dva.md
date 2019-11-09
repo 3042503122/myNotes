@@ -1,0 +1,1157 @@
+# umi(脚手架)
+
+## FAQ
+
+- `yarn create umi `command failed
+
+这个问题基本上都是因为没有添加 yarn global module 的路径到 PATH 环境变量引起的。
+
+先执行 `yarn global bin` 拿到路径，然后添加到 PATH 环境变量里。
+
+```
+$ yarn global bin
+/usr/local/bin
+```
+
+你也可以尝试用 npm，
+
+```
+$ npm create umi
+```
+
+或者手动安装 create-umi，并执行他，
+
+```
+$ npm install create-umi -g
+$ create-umi
+```
+
+
+
+- Link VS NavLink
+
+  [Link api](http://react-guide.github.io/react-router-cn/docs/API.html#link)
+
+
+
+## config/config.js
+
+`plugins` ：配置
+
+`routes` : 配置
+
+- `path`
+
+- `name`
+
+- `component`
+
+- `icon`
+
+- `redirect`
+
+- `routes`
+
+  [path ](https://v2-pro.ant.design/docs/layout-cn#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-ant-design-pro-%E5%B8%83%E5%B1%80)
+
+   [path | name | icon | component | redirect | routes | hideInMenu |hideChildrenInMenu | authority](https://v2-pro.ant.design/docs/router-and-nav-cn#%E5%9C%A8%E8%8F%9C%E5%8D%95%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84-icon)
+
+  [path | name | icon | component | redirect | routes | hideInMenu |hideChildrenInMenu | authority](https://v2-pro.ant.design/docs/router-and-nav-cn#%E8%B7%AF%E7%94%B1)
+
+```
+export default [
+  {
+    path: '/',
+    component: '../layouts/BasicLayout',
+    routes: [
+      // 跳转外边链接
+      {
+        path: url + '/community/shop/manage',
+        name: 'shopManager', //店长管理
+        icon: 'team',
+      },
+       // 一级页面，无嵌套
+      {
+        path: '/v2/shop_manage',
+        name: 'shopManage', //店铺组管理
+        component: './ShopManage',
+        icon: 'bank',
+      },
+      
+      // 有二级菜单
+      {
+        path: '/v2/report',
+        name: 'report',
+        icon: 'bar-chart',
+        routes: [
+          {
+            path: '/v2/report/daily_sales_summary',
+            name: 'dailySalesSummary', //每日销售汇总
+            component: './Report/DailySummary',
+            icon: 'file-text',
+          },
+          {
+            path: '/v2/report/daily_sales_detail',
+            name: 'dailySalesDetail', //每日销售明细
+            component: './Report/DailyDetail',
+            icon: 'file-text',
+          },
+        ],
+      },
+      // 无二级类目，单都是主页面点击嵌套页面
+      {
+        path: '/v2/plan_manage',
+        redirect: '/v2/plan_manage/list',
+      },
+      {
+        path: '/v2/plan_manage',
+        name: 'planToday', //今日团购计划配置
+        icon: 'tags',
+        routes: [
+          {
+            path: '/v2/plan_manage/list',
+            name: 'list', //计划列表
+            component: './PlanManage/list',
+            hideInMenu: true,
+          },
+          {
+            path: '/v2/plan_manage/category/:id',
+            name: 'category', //类目展示
+            component: './PlanManage/categoryFloor',
+            hideInMenu: true,
+          }
+          
+        ],
+      },
+      {
+        path: '/v2/exception/403',
+        component: './Exception/403',
+      },
+      {
+        path: '/v2/exception/500',
+        component: './Exception/500',
+      },
+      {
+        component: '404',
+      },
+    ],
+  },
+];
+
+```
+
+`treeShare` : true
+
+`publicPath` : 配置
+
+`disableRedirectHoist` : true
+
+`hash` : false
+
+`targets ` ：配置
+
+`chainWebpack`：umi模板自动生成
+
+`treeShaking ` : true
+
+`theme`：配置
+
+`define`：umi模板自动生成
+
+`proxy`：配置。[配置参数说明](https://segmentfault.com/a/1190000016199721) [为什么proxy能解决跨域问题](https://www.jianshu.com/p/c978b29a8d88)
+
+```
+// 代理请求到其他服务器。访问 /api/users` 就能访问到 http://jsonplaceholder.typicode.com/users](http://jsonplaceholder.typicode.com/users) 的数据
+
+// 写法1
+proxy: [
+    {
+      context: [
+        '/community',
+        '/statistics',
+        '/fresh',
+        '/common',
+        '/category',
+        '/recommend',
+        '/shop',
+        '/resourceInfo',
+        '/activePage',
+        '/sku',
+      ],
+      target: 'http://beta-chunxiao.jd.com',
+      changeOrigin: true,
+    },
+  ],
+  
+// 写法2
+"proxy": {
+  "/api": {
+    "target": "http://jsonplaceholder.typicode.com/",
+    "changeOrigin": true,
+    "pathRewrite": { "^/api" : "" }
+  }
+}
+```
+
+`mainfest`: umi模板自动生成
+
+
+
+# ant-design-pro
+
+[ api ](https://v2-pro.ant.design/index-cn)
+
+## 定义
+
+Ant Design Pro 是一套基于 React 技术栈的单页面应用
+
+## 发请求
+
+使用umi框架提供的 `src/utils/request.js`
+
+
+
+## 更改theme
+
+![](E:\self\记录\myNotes\rn\react_4.png)
+
+![](E:\self\记录\myNotes\rn\react_5.png)
+
+<img src="E:\self\记录\myNotes\rn\react_6.png" style="zoom: 67%;" />
+
+
+
+## 新增页面
+
+- step1: src/pages/xxx.jsx
+
+  ![](E:\self\记录\myNotes\rn\react_7.png)
+
+  文件夹结构pages
+
+  ├── 404.js
+  ├── ActivityManage
+  ├── Authorized.js
+  ├── Category
+  ├── document.ejs
+  ├── Exception
+  ├── LaunchManage
+  ├── MaterialManage
+  ├── PlanManage
+  ├── Report
+  └── ShopManage
+
+  Report文件夹
+
+  ├── DailyDetail
+  |  ├── components
+  |  |  ├── DailyDetailDialog.js
+  |  |  ├── DailyDetailSearchFilter.js
+  |  |  └── DailyDetailTable.js
+  |  └── index.js
+  ├── DailySummary
+  |  ├── components
+  |  |  ├── DailySummarySearchFilter.js
+  |  |  └── DailySummaryTable.js
+  |  └── index.js
+  ├── index.less
+  ├── Purchase
+  |  ├── components
+  |  |  ├── AddPurchaseDialog.js
+  |  |  ├── PurchaseSearchFilter.js
+  |  |  └── PurchaseTable.js
+  |  ├── index.js
+  |  └── index_cp.js
+  ├── Transport
+  |  ├── components
+  |  |  ├── AddTransportDialog.js
+  |  |  ├── TransportSearchFilter.js
+  |  |  └── TransportTable.js
+  |  └── index.js
+  └── Verification
+     ├── components
+     |  ├── AddVerficationDialog.js
+     |  ├── VerficationSearchFilter.js
+     |  └── VerficationTable.js
+     └── index.js
+
+  
+
+- step2: config/config.js 或者是 router.config.js中新增路由
+
+  **左侧导航顺序 ，由此项决定**
+
+- step3: src/locales/zh-CN.js -> menu.js 中 新增
+
+  ```
+  'menu.testadd': '测试新增页面'
+  ```
+
+- 样式
+
+  1. `src/global.less` 全局reset
+
+     —基本没改
+
+  2. `src/utils/utils.less` 这里可以放置一些工具函数供调用，比如清除浮动 `.clearfix`。
+
+     —基本没改
+
+  3. `src/components/TopNavHeader/index.less` 组件级，自动全局的
+
+     不用加:global()
+
+  4. `src/layouts/BasicLayout.less` 通用模块级，自动全局的
+
+     不用加:global()
+
+  5. `src/pages/Report/index.less`  
+
+     加:global() 才能全局
+
+  6. `src/pages/Report/DailyDetail/index.less` 页面级别样式，非全局
+
+     也可以.jsx 内部定义变量
+
+     ```
+     export default class AddPurchaseDialog extends Component {
+       constructor(props) {
+         super(props);
+         this.state = {
+           visible: false,
+           loading: false, // 提交时loading
+         };
+       }
+     
+     
+       render() {
+         const { loading } = this.state;
+         const {
+           form: { getFieldDecorator, getFieldValue },
+           popShops,
+         } = this.props;
+     
+         return (
+           <div style={styles.bottomSubmit}>
+                   <Button
+                     key="submit"
+                     type="primary"
+                     loading={loading}
+                     onClick={this.onOK}
+                     style={styles.btnMargin}
+                   >
+                     确认
+                   </Button>
+                   <Button onClick={this.onClose}>取消</Button>
+                 </div>
+         );
+       }
+     }
+     const styles = {
+       bottomSubmit: {
+         display: 'flex',
+         justifyContent: 'flex-end',
+         margin: '24px -24px -14px',
+         borderTop: '1px solid #e8e8e8',
+         paddingTop: '10px',
+         paddingRight: '24px',
+       },
+       btnMargin: {
+         marginRight: '10px',
+       },
+       inlineFormItem: { display: 'inline-block', width: 'calc(50% - 12px)' },
+       breakLine: { display: 'inline-block', width: '24px', textAlign: 'center', marginLeft: '-10px' },
+     };
+     
+     ```
+
+     
+
+  ​       
+
+  1. 使用系统统一变量
+  2. 使用全局公共样式
+  3. 只是该页面的样式
+
+  
+
+  样式文件默认使用 [CSS Modules](https://www.ruanyifeng.com/blog/2016/06/css_modules.html)，如果需要，你可以在样式文件的头部引入 [antd 样式变量文件](https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less)：
+
+  ```css
+  @import '~antd/lib/style/themes/default.less';
+  ```
+
+  这样可以很方便地获取 antd 样式变量并在你的文件里使用，有利于保持页面的一致性，也方便实现定制主题。
+
+# dva
+
+[api](https://dvajs.com/guide/introduce-class.html#目前最流行的数据流方案)
+
+
+
+# 盲点
+
+## 起项目、打包发布项目
+
+- 启动预发：使用预发接口 - `yarn start:no-mock` 使用mock`yarn start`
+- 启动线上：`yarn start`
+- 打包预发：`yarn build-beta `
+- 打包线上：`yarn build`
+
+## 获取带参数的路由中参数
+
+在路由组件中，可以通过`this.props.match.params` 来获得路由参数。
+
+- ```
+  // 页面
+  <Child params="{this.props.match.params}}"></Child>
+  ```
+
+  ```
+  // 子组件：Child
+  内部可以直接使用 this.props.params
+  ```
+
+
+## Table一个单元格中展示纵向多个字段
+
+```
+{
+        title: '用户信息',
+        dataIndex: 'pin',
+        width: 200,
+        render: (text, item) => {
+          return (
+            <Fragment>
+              <div>PIN: {item.pin}</div>
+              <div>unionId: {item.unionId}</div>
+              <div>店铺名称: {getAttr(item.shopName)}</div>
+              <div>手机号: {item.mobile}</div>
+              <div>姓名: {item.accountName}</div>
+              <div>微信名: {getWxName(item.wxUserInfo)}</div>
+            </Fragment>
+          )
+        }
+}
+```
+
+## 请求接口json错误返回(loading)html
+
+疑惑：预发机器正常返回json，但是本地起的服务器返回(loading)html。例如`'/community/shop/list'`
+
+解决：
+
+```
+// config\config.js 增加'/community',
+proxy: [
+    {
+      context: [
+        '/community',
+        '/statistics',
+        '/fresh',
+        '/common',
+        '/category',
+        '/recommend',
+        '/shop',
+        '/resourceInfo',
+        '/activePage',
+        '/sku',
+      ],
+      target: 'http://beta-chunxiao.jd.com',
+      changeOrigin: true,
+    },
+  ]
+```
+
+
+
+## 获取DatePicker值
+
+```
+if (values.startDate) {
+	values.startDate = moment(values.startDate).format(formatDate);
+}
+```
+
+## 测试账号导出
+
+[功能项目](http://beta-chunxiao.jd.com/v2/shopowner_manage/index)
+
+
+
+## onClick中传参，自动指向组件this
+
+```
+<Button type="link" onClick={() => this.handleOpenQualifications(record.id)}>查看资质</Button>
+```
+
+## antd中Modal.confirm js调用法
+
+问题：
+
+```
+okButtonProps: {
+  disabled: status == 1 && resetReasonChecked.length == 0
+},
+```
+
+resetReasonChecked.length改变弹出disabled状态并没有更新
+
+结局
+
+
+
+## connect 和 @connect
+
+[react dva 的 connect 与 @connect](https://www.jianshu.com/p/21224080326e)
+
+[官网](https://dvajs.com/guide/introduce-class.html#connect-方法)
+
+```
+import { connect } from 'dva';
+
+function mapStateToProps(state) {
+  return { todos: state.todos };
+}
+connect(mapStateToProps)(App);
+```
+
+写法1：
+
+```
+export default class BasicLayout extends React.PureComponent { // ...
+}
+
+export default connect(({ user, login, global = {}, loading }) => ({
+    currentUser: user.currentUser,
+    collapsed: global.collapsed,
+    fetchingNotices: loading.effects['global/fetchNotices'],
+    notices: global.notices
+}))(BasicLayout);
+```
+
+写法2：
+
+```
+@connect(({ user, login, global = {}, loading }) => ({
+    currentUser: user.currentUser,
+    collapsed: global.collapsed,
+    fetchingNotices: loading.effects['global/fetchNotices'],
+    notices: global.notices,
+    menuData: login.menuData,
+    redirectData: login.redirectData,
+}))
+
+export default class BasicLayout extends React.PureComponent { // ...
+}
+```
+
+
+
+## Table里面嵌套Popover
+
+当Table里面嵌套的Popover的列是 fixed时， Popover不能手动控制(visible | onVisibleChange) 。
+
+可以选择Popconfirm
+
+
+
+
+
+## 组件通信
+
+### 父  ->(调用) 子 方法
+
+​       -> searc() {}
+
+```
+// 父组件
+<Child refresh={getList => { this.getList=getList } } ></Child>
+
+// 子组件
+class Child extends PureComponent {
+    constructor(props) {
+       super(props);
+       
+       this.props.refresh(this.search);
+    }
+    
+	search() {
+		
+	}
+}
+```
+
+
+
+## 表单专题
+
+### 知识概要
+
+-  经过 `Form.create` 包装的组件将会自带 `this.props.form` 属性，`this.props.form` 提供的 API 如下： 
+
+   注意：使用 `getFieldsValue` `getFieldValue` `setFieldsValue` 等时，应确保对应的 field 已经用 `getFieldDecorator` 注册过了。 
+
+  ```
+  class CustomizedForm extends React.Component {
+  	render() {
+  		this.props.form
+  	}
+  }
+  
+  CustomizedForm = Form.create({})(CustomizedForm);
+  ```
+
+  
+
+- getFieldDecorator 
+
+  经过 `getFieldDecorator` 包装的控件，表单控件会自动添加 `value`（或 `valuePropName` 指定的其他属性） `onChange`（或 `trigger` 指定的其他属性），数据同步将被 Form 接管，这会导致以下结果：
+
+  1. 你**不再需要也不应该**用 `onChange` 来做同步，但还是可以继续监听 `onChange` 等事件。
+  2. 你不能用控件的 `value` `defaultValue` 等属性来设置表单域的值，默认值可以用 `getFieldDecorator` 里的 `initialValue`。
+  3. 你不应该用 `setState`，可以使用 `this.props.form.setFieldsValue` 来动态改变表单值。
+
+  -  options.initialValue 
+
+  -  options.rules 
+
+    - 【错误提示】message 
+
+    - 【是否必填】required: true | false
+
+    - 【类型校验】type
+      - `email`: Must be of type `email`.
+      - `string`: Must be of type `string`. `This is the default type.`
+      - `number`: Must be of type `number`.
+      - `boolean`: Must be of type `boolean`.
+      - `method`: Must be of type `function`.
+      - `regexp`: Must be an instance of `RegExp` or a string that does not generate an exception when creating a new `RegExp`.
+      - `integer`: Must be of type `number` and an integer.
+      - `float`: Must be of type `number` and a floating point number.
+      - `array`: Must be an array as determined by `Array.isArray`.
+      - `object`: Must be of type `object` and not `Array.isArray`.
+      - `enum`: Value must exist in the `enum`.
+      - `date`: Value must be valid as determined by `Date`
+      - `url`: Must be of type `url`.
+      - `hex`: Must be of type `hex`.
+
+    - 【正则表达式校验】pattern
+    
+    ​          手机号：` /^1[3-9][0-9]{9}$/`
+    
+    ​          数字：`/^[1-9][0-9]*$/`
+    
+    ​          skuId: `/^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/`
+    
+    ​          价格：正整数或浮点数小数点后最多保留2位`/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/`
+    
+    - 【自定义规则】validator:  function(rule, value, callback) {  callback() }
+    
+      自定义校验（注意，[callback 必须被调用](https://github.com/ant-design/ant-design/issues/5155)） 
+    
+      // 不能重复
+    
+      ```
+      validator: (rule, value, callback) =>{
+        if (!value) {
+          callback();
+          return null;
+        }
+        let repeat = false;
+        for (let el of this.props.list) {
+          if (el.categoryName == value) {
+            repeat = true;
+            break;
+          }
+        }
+        if (repeat) {
+          callback('类目名称不允许重名');
+        } else {
+          callback();
+        }
+      }
+      ```
+    
+    - 【字符串长度】len
+    
+    - 【字符串最小长度】min
+    
+    - 【字符串最大长度】max
+    
+    ​          
+    
+    ​          
+
+  ```
+  <Form.Item label="E-mail">
+            {getFieldDecorator('email', {
+              rules: [
+                // 必填
+                {
+                  required: true,
+                  message: 'Please input your E-mail!',
+                },
+                // email
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                },
+                
+              ],
+            })(<Input />)}
+  </Form.Item>
+  ```
+
+  ```
+    
+    
+  ```
+
+-  getFieldsValue 
+
+-  resetFields 
+
+-  getFieldsError
+
+  ```
+  <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+  Log in
+  </Button>
+  
+  function hasErrors(fieldsError) {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+  ```
+
+  
+
+### 团购时间：开始时间-结束时间(且只能选15天时间间隔)
+
+> 难点：布局
+>
+> 难点：只能选15天时间间隔
+
+```
+import React, { Fragment } from 'react';
+import { Form, DatePicker } from 'antd';
+import moment from 'moment';
+import { disabledCurrentDay } from '@/utils/utils';
+
+const { Item: FormItem } = Form;
+
+const formatDate = 'YYYY-MM-DD HH:mm:ss';
+
+// 时间选择最大可选择时间范围
+const MAX_DAYS_DISTANCE = 15;
+
+export default ({ form: { getFieldDecorator, getFieldValue } }) => (
+  <Fragment>
+    <FormItem label="团购实际结束时间">
+      <FormItem style={styles.inlineFormItem}>
+        {getFieldDecorator('tmTimeStart', {
+          rules: [
+            {
+              required: true,
+              message: '请选择时间',
+            },
+            {
+              validator: (rule, value, callback) => {
+                console.log('开始时间选择', moment(value).format(formatDate));
+                if (!value) {
+                  callback();
+                } else {
+                  if (value.isBefore(moment()) || value.isSame(moment())) {
+                    let endTime = getFieldValue('tmTimeEnd');
+                    if (!endTime) {
+                      callback();
+                    } else {
+                      console.log(
+                        '开始时间2222----',
+                        moment(value).format(formatDate),
+                        moment().format(formatDate)
+                      );
+                      if (endTime.isBefore(value)) {
+                        callback('开始时间不能大于结束时间');
+                      } else if (Math.abs(moment(value).diff(moment(endTime), 'days')) > MAX_DAYS_DISTANCE) {
+                        callback(`不可超过${MAX_DAYS_DISTANCE}天`);
+                      } else {
+                        callback();
+                      }
+                    }
+                    callback();
+                  } else {
+                    callback('不能大于当前时间');
+                  }
+                }
+                callback();
+              },
+            },
+          ],
+        })(<DatePicker placeholder="开始日期" format="YYYY-MM-DD HH:mm:ss" showTime />)}
+      </FormItem>
+      <span style={styles.breakLine}>～</span>
+      <FormItem style={styles.inlineFormItem}>
+        {getFieldDecorator('tmTimeEnd', {
+          rules: [
+            {
+              required: true,
+              message: '请选择时间',
+            },
+            {
+              validator: (rule, value, callback) => {
+                console.log('结束时间选择', moment(value).format(formatDate));
+                if (!value) {
+                  callback();
+                } else {
+                  console.log(
+                    '结束时间2222----',
+                    moment(value).format(formatDate),
+                    moment().format(formatDate)
+                  );
+                  if (value.isBefore(moment()) || value.isSame(moment())) {
+                    let beginTime = getFieldValue('tmTimeStart');
+                    if (!beginTime) {
+                      callback();
+                    } else {
+                      if (beginTime.isAfter(value)) {
+                        callback('结束时间不能小于开始时间');
+                      } else if (Math.abs(moment(value).diff(moment(beginTime), 'days')) > MAX_DAYS_DISTANCE) {
+                        callback(`不可超过${MAX_DAYS_DISTANCE}天`);
+                      } else {
+                        callback();
+                      }
+                    }
+                    callback();
+                  } else {
+                    callback('不能大于当前时间');
+                  }
+                }
+              },
+            },
+          ],
+        })(<DatePicker placeholder="结束日期" format="YYYY-MM-DD HH:mm:ss" showTime />)}
+      </FormItem>
+    </FormItem>
+  </Fragment>
+);
+
+const styles = {
+  inlineFormItem: { display: 'inline-block', width: 'calc(50% - 12px)' },
+  breakLine: { display: 'inline-block', width: '24px', textAlign: 'center', marginLeft: '-10px' },
+};
+
+```
+
+
+
+### 文件上传 : 二进制流 -> 京东云  京东云返回图片所在云上地址url  -> 后端接口
+
+#### 图片
+
+
+
+#### 文件
+
+```
+// 上传到
+action=
+// 上传非图片
+"https://dlupload.jd.com/upload"
+
+// 上传图片
+"https://dlupload.jd.com/uploadimg"
+```
+
+
+
+### 文件上传： 二进制流 -> 后端接口 后端接口返回线上地址
+
+// 手动上传案例
+
+// 易错点：content-type应该配置 application/x-www-form-urlencoded。当配置成multipart/form-data 时，请求入参无参数、content-type无boundary，且服务端报500
+
+// 请求入参key名确定是后端接收的key名
+
+```
+           <Upload
+              accept=".csv,.CSV"
+              withCredentials={true}
+              fileList={this.state.fileList}
+              beforeUpload={file => {
+                this.setState({
+                  fileList: [file]
+                })
+                return false;
+              }}
+            >
+              <Button type="primary" size="small">
+                上传文件
+              </Button>
+              <span className="UploadTip">
+                请上传.csv格式文件。
+              </span>
+            </Upload>
+            // 上传
+            <Button onClick={ () => this.handleOkAddByFileModal()}></Button>
+            
+  handleOkAddByFileModal() {
+    const { fileList } = this.state;
+    console.log("TCL: SkuInfoManage -> handleOkAddByFileModal -> fileList", fileList)
+    const formData = new FormData();
+    fileList.forEach(file => {
+      formData.append('file', file);
+    });
+    this.props.dispatch({
+      type: 'skuInfoManage/updateLinePriceByFile',
+      data: formData,
+      callback: res=>{
+        if (res.code == 200){
+          this.setState({
+            showAddByFileModal: false,
+            showInfoModal: true
+          })
+        }
+      }
+    });
+  }            
+```
+
+
+
+## content-type
+
+get请求不存在设置`content-type`。只有post和put用到`content-type`，常用的post方式，所以这里着重说post。
+ post的content-type三种类型：
+
+- Content-Type: application/json
+   对于axios，post的时候`axios.post(url,{a:1,b:2})`，第二个参数是对象的时候，默认是这个类型
+
+- Content-Type: application/x-www-form-urlencoded
+   对于axios，post的时候`let data = {a:1,b:2}; axios.post(url,qs.stringify({ data }))`，第二个参数是字符串的时候，默认是这个类型
+
+  **文件上传二进制流是此类型**
+
+- Content-Type: multipart/form-data
+   对于axios，post的时候`let data = new FormData(); data.append('a',1'); data.append('b',2); axios.post(url,data)`，参数是formData类型的时候，默认是这个类型，如果用form自带的action提交，默认是这个类型
+
+以上三种方式，服务器会以不同的方式解析，这点尤其注意！！！！！
+
+- Content-Type:text/html
+
+- Content-Type:text/plain
+
+- Content-Type:text/css
+
+- Content-Type:text/javascript
+
+- Content-Type:application/xml
+
+### post:  application/json 
+
+![](E:\self\记录\myNotes\images\post_1.png)
+
+
+
+### get
+
+无content-type
+
+参数：Query String parameters
+
+![](E:\self\记录\myNotes\images\get.png)
+
+
+
+## static
+
+- 旧写法
+
+  ```
+  import PropTypes from 'prop-types';
+  
+  class Greeting extends React.Component {
+    render() {
+      return (
+        <h1>Hello, {this.props.name}</h1>
+      );
+    }
+  }
+  
+  Greeting.propTypes = {
+    name: PropTypes.string
+  };
+  
+  // 指定 props 的默认值：
+  Greeting.defaultProps = {
+    name: 'Stranger'
+  };
+  ```
+
+- 新写法
+
+  ```
+  import PropTypes from 'prop-types';
+  
+  class Greeting extends React.Component {
+    static propTypes = {
+        name: PropTypes.string
+    }
+    
+    defaultProps = {
+        name: 'Stranger'
+    }
+  
+    render() {
+      return (
+        <h1>Hello, {this.props.name}</h1>
+      );
+    }
+  }
+  ```
+
+  
+
+## state实例属性的新写法
+
+[参考链接](http://es6.ruanyifeng.com/#docs/class#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7%E7%9A%84%E6%96%B0%E5%86%99%E6%B3%95)
+
+ 实例属性除了定义在`constructor()`方法里面的`this`上面，也可以定义在类的最顶层 
+
+- 旧写法
+
+  ```
+  class IncreasingCounter {
+    constructor() {
+      this.state = {
+         count:0
+      };
+    }
+  }
+  
+  ```
+
+  
+
+- 新写法
+
+  ```
+  class IncreasingCounter {
+    state = {
+    	count: 0
+    }
+  }
+  ```
+
+   这种新写法的好处是，所有实例对象自身的属性都定义在类的头部，看上去比较整齐，一眼就能看出这个类有哪些实例属性。 
+
+
+
+```
+class foo {
+  bar = 'hello';
+  baz = 'world';
+
+  constructor() {
+    // ...
+  }
+}
+```
+
+ 上面的代码，一眼就能看出，`foo`类有两个实例属性，一目了然。另外，写起来也比较简洁。 
+
+
+
+
+
+
+
+## @：装饰器
+
+api: 【es6 - > Decorator 装饰器】
+
+[参考链接](http://es6.ruanyifeng.com/#docs/decorator)
+
+- 旧写法
+
+  ```
+  import React, { Component, Fragment } from 'react';
+  import { connect } from 'dva';
+  
+  class AddTransportDialog extends Component {
+  }
+  
+  export default connect(mapStateToProps)(Form.create()(AddTransportDialog))
+  ```
+
+- 新写法
+
+  ```
+  import React, { Component, Fragment } from 'react';
+  import { connect } from 'dva';
+  
+  
+  @connect(({ sales }) => ({
+    sales,
+  }))
+  @Form.create()
+  
+  export default class AddTransportDialog extends Component {
+  }
+  ```
+
+
+
+## React Context
+
+[参考链接](https://www.jianshu.com/p/eba2b76b290b)
+
+
+
+## 超过出…悬浮出tooltip
+
+- Tooltip
+
+  ```
+  return text.length >= 10 ? (
+              <Tooltip placement="top" title={text}>
+                {text.slice(0, 12)}...
+              </Tooltip>
+            ) : (
+              text
+            );
+  ```
+
+- Popover
+
+  ```
+  let limitCount = 8;
+              if (text.length > limitCount) {
+                return (
+                  <Popover content={text}>
+                    <span style={{ cursor: 'pointer' }}>{text.substring(0, limitCount)}...</span>
+                  </Popover>
+                );
+              } else {
+                return text;
+              }
+  ```
+
+  
+
+
+
+
+
+
+# FAQ
+
+## 无法提交代码
+
+报错：
+
+解决：
+
+项目中.git文件夹中：如果没有说明是隐藏文件，设置显示隐藏文件
+
+删除`\.git\hooks\pre-commit`
