@@ -98,7 +98,7 @@ export default [
           },
         ],
       },
-      // 无二级类目，单都是主页面点击嵌套页面
+      // 一级页面（无二级类目），单都是主页面点击嵌套页面
       {
         path: '/v2/plan_manage',
         redirect: '/v2/plan_manage/list',
@@ -313,6 +313,8 @@ Ant Design Pro 是一套基于 React 技术栈的单页面应用
 
      也可以.jsx 内部定义变量
 
+     1) 引入样式
+     
      ```
      export default class AddPurchaseDialog extends Component {
        constructor(props) {
@@ -326,6 +328,60 @@ Ant Design Pro 是一套基于 React 技术栈的单页面应用
      
        render() {
          const { loading } = this.state;
+         const {
+           form: { getFieldDecorator, getFieldValue },
+           popShops,
+         } = this.props;
+     
+         return (
+           <div className={styles.bottomSubmit}>
+                   <Button
+                     key="submit"
+                     type="primary"
+                     loading={loading}
+                     onClick={this.onOK}
+                     style={styles.btnMargin}
+                   >
+                     确认
+                   </Button>
+                   <Button onClick={this.onClose}>取消</Button>
+                 </div>
+         );
+       }
+     }
+     import styles from './index.less';
+     
+     ```
+     
+     ```
+     // index.less
+     .bottomSubmit{
+     	display: flex;
+     	justify-content: flex-start;
+     }
+     .btnMargin{
+     	margin-right: 10px;
+     }
+     ```
+     
+
+     
+  
+   2) 行内样式
+  
+   ```
+     export default class AddPurchaseDialog extends Component {
+       constructor(props) {
+         super(props);
+       this.state = {
+           visible: false,
+         loading: false, // 提交时loading
+         };
+     }
+     
+     
+       render() {
+       const { loading } = this.state;
          const {
            form: { getFieldDecorator, getFieldValue },
            popShops,
@@ -363,24 +419,24 @@ Ant Design Pro 是一套基于 React 技术栈的单页面应用
        breakLine: { display: 'inline-block', width: '24px', textAlign: 'center', marginLeft: '-10px' },
      };
      
-     ```
-
+   ```
+  
      
-
+  
   ​       
-
+  
   1. 使用系统统一变量
   2. 使用全局公共样式
   3. 只是该页面的样式
-
   
-
+  
+  
   样式文件默认使用 [CSS Modules](https://www.ruanyifeng.com/blog/2016/06/css_modules.html)，如果需要，你可以在样式文件的头部引入 [antd 样式变量文件](https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less)：
-
+  
   ```css
   @import '~antd/lib/style/themes/default.less';
   ```
-
+  
   这样可以很方便地获取 antd 样式变量并在你的文件里使用，有利于保持页面的一致性，也方便实现定制主题。
 
 # dva
@@ -588,9 +644,9 @@ class Child extends PureComponent {
 
 ### 知识概要
 
--  经过 `Form.create` 包装的组件将会自带 `this.props.form` 属性，`this.props.form` 提供的 API 如下： 
+- 经过 `Form.create` 包装的组件将会自带 `this.props.form` 属性，`this.props.form` 提供的 API 如下： 
 
-   注意：使用 `getFieldsValue` `getFieldValue` `setFieldsValue` 等时，应确保对应的 field 已经用 `getFieldDecorator` 注册过了。 
+  注意：使用 `getFieldsValue` `getFieldValue` `setFieldsValue` 等时，应确保对应的 field 已经用 `getFieldDecorator` 注册过了。 
 
   ```
   class CustomizedForm extends React.Component {
@@ -604,7 +660,7 @@ class Child extends PureComponent {
 
   
 
-- getFieldDecorator 
+  #### getFieldDecorator 
 
   经过 `getFieldDecorator` 包装的控件，表单控件会自动添加 `value`（或 `valuePropName` 指定的其他属性） `onChange`（或 `trigger` 指定的其他属性），数据同步将被 Form 接管，这会导致以下结果：
 
@@ -614,12 +670,16 @@ class Child extends PureComponent {
 
   -  options.initialValue 
 
+  - options.validateTrigger
+
+    校验子节点值的时机
+
   -  options.rules 
 
     - 【错误提示】message 
-
+  
     - 【是否必填】required: true | false
-
+  
     - 【类型校验】type
       - `email`: Must be of type `email`.
       - `string`: Must be of type `string`. `This is the default type.`
@@ -631,29 +691,103 @@ class Child extends PureComponent {
       - `float`: Must be of type `number` and a floating point number.
       - `array`: Must be an array as determined by `Array.isArray`.
       - `object`: Must be of type `object` and not `Array.isArray`.
-      - `enum`: Value must exist in the `enum`.
+    - `enum`: Value must exist in the `enum`.
       - `date`: Value must be valid as determined by `Date`
       - `url`: Must be of type `url`.
       - `hex`: Must be of type `hex`.
-
+  
     - 【正则表达式校验】pattern
     
     ​          手机号：` /^1[3-9][0-9]{9}$/`
     
     ​          数字：`/^[1-9][0-9]*$/`
     
-    ​          skuId: `/^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/`
+    ​	       自然数：`/^0|([1-9][0-9]*)$/`0,1，..
+    
+    ​          skuId: `/^-?([1-9][0-9]*)(\.[0-9]*)?$/`
     
     ​          价格：正整数或浮点数小数点后最多保留2位`/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/`
+    
+    ​          不能包含特殊字符：`/[[`~!@#$^&*()=|{}':;',\\[\\].<> 《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]/`
+    
+    ​           [其他](https://juejin.im/post/5dccdd24f265da0c09156fb3?utm_source=gold_browser_extension)
+    
+    ​                                         
     
     - 【自定义规则】validator:  function(rule, value, callback) {  callback() }
     
       自定义校验（注意，[callback 必须被调用](https://github.com/ant-design/ant-design/issues/5155)） 
     
+      // 请求校验
+    
+      ```
+      {
+      validator: (rule, value, callback)=>{
+      	if (this.props.type != 'new'){
+      		callback();
+      		return null;
+      	}
+      	if (!value){
+      		callback();
+      	} else {
+      		this.props.dispatch({
+      			type: 'planManage/validPlanName',
+      			param: {
+      				planName: value
+      			},
+      			callback: res => {
+      				if (res.code == 200){
+      					callback();
+      				} else {
+      					callback(res.msg);
+      				}
+      			}
+      		});
+      	}
+        }
+      }
+      ```
+    
+      // 和表单里的其他项比较
+    
+    ```
+      {
+      validator: (rule, value, callback) => {
+        console.log('开始时间选择', moment(value).format(formatDate));
+        if (!value) {
+          callback();
+        } else {
+          if (value.isBefore(moment()) || value.isSame(moment())) {
+            let endTime = getFieldValue('tmTimeEnd');
+            if (!endTime) {
+              callback();
+            } else {
+              console.log(
+                '开始时间2222----',
+                moment(value).format(formatDate),
+                moment().format(formatDate)
+              );
+              if (endTime.isBefore(value)) {
+                callback('开始时间不能大于结束时间');
+              } else if (Math.abs(moment(value).diff(moment(endTime), 'days')) > MAX_DAYS_DISTANCE) {
+              callback(`不可超过${MAX_DAYS_DISTANCE}天`);
+              } else {
+                callback();
+              }
+            }
+          callback();
+          } else {
+          callback('不能大于当前时间');
+          }
+        }
+        callback();
+  },
+    ```
+  
       // 不能重复
     
       ```
-      validator: (rule, value, callback) =>{
+    validator: (rule, value, callback) =>{
         if (!value) {
           callback();
           return null;
@@ -682,7 +816,7 @@ class Child extends PureComponent {
     ​          
     
     ​          
-
+  
   ```
   <Form.Item label="E-mail">
             {getFieldDecorator('email', {
@@ -702,18 +836,24 @@ class Child extends PureComponent {
             })(<Input />)}
   </Form.Item>
   ```
-
+  
   ```
     
     
   ```
-
--  getFieldsValue 
-
--  resetFields 
-
--  getFieldsError
-
+  
+  #### getFieldsValue 
+  
+  ```
+  this.props.form.getFieldsValue(["code", "planName", "activeName", "regionId", "status"])
+  ```
+  
+  
+  
+  #### resetFields 
+  
+  #### getFieldsError
+  
   ```
   <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
   Log in
@@ -724,7 +864,82 @@ class Child extends PureComponent {
   }
   ```
 
+
+
+### 开发中理解
+
+#### 为什么需求FormItem
+
+- 因为校验结果红色提示文字位置：FormItem-wrapper -》FormItem - wrapper - 校验状态wrapper 下面包括
+
+
+1)  表单元素 2）红色提示文字
+
+- 一个提示FormItem里面 只允许一个getFieldDecorator，下例子允许
+
+  ```
+  <FormItem>
+  	{
+  		getFieldDecorator
+  	}
+  	<FormItem>
+  		{
+  		getFieldDecorator
+          }
+  	</FormItem>
+  </FormItem>
+  ```
+
   
+
+
+
+
+
+
+### 一个formItem显示2项
+
+```
+             <Col {...colLayout}>
+              <FormItem className="shopGroup" label="条件" {...formItemLayout}>
+                <FormItem className="shopGroupSelect">
+                  {getFieldDecorator('source', {
+                    initialValue: Object.keys(sourceOptions)[0],
+                  })(
+                    <Select placeholder="请选择">
+                      {Object.entries(sourceOptions).map(el => {
+                        return (
+                          <Option value={el[0]} key={el[0]}>
+                            {el[1]}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  )}
+                </FormItem>
+                <FormItem className="shopGroupInput">
+                  {getFieldDecorator('pin', {
+                    initialValue: this.props.pin || '',
+                  })(<Input placeholder="请输入" />)}
+                </FormItem>
+              </FormItem>
+            </Col>
+      
+      .shopGroup{
+        .ant-form-item-children{
+          display:flex;
+          align-items: center;
+        }
+        .shopGroupSelect{
+          margin-right: 10px;
+        }
+        .shopGroupInput{
+          flex: 1;
+        }
+      }
+```
+
+
 
 ### 团购时间：开始时间-结束时间(且只能选15天时间间隔)
 
@@ -873,8 +1088,14 @@ action=
 
 // 请求入参key名确定是后端接收的key名
 
+![](E:\self\记录\myNotes\images\umi_1.png)
+
+![](E:\self\记录\myNotes\images\umi_2.png)
+
+
+
 ```
-           <Upload
+  <Upload
               accept=".csv,.CSV"
               withCredentials={true}
               fileList={this.state.fileList}
@@ -932,8 +1153,8 @@ get请求不存在设置`content-type`。只有post和put用到`content-type`，
 
   **文件上传二进制流是此类型**
 
-- Content-Type: multipart/form-data
-   对于axios，post的时候`let data = new FormData(); data.append('a',1'); data.append('b',2); axios.post(url,data)`，参数是formData类型的时候，默认是这个类型，如果用form自带的action提交，默认是这个类型
+   - Content-Type: multipart/form-data
+      对于axios，post的时候`let data = new FormData(); data.append('a',1'); data.append('b',2); axios.post(url,data)`，参数是formData类型的时候，默认是这个类型，如果用form自带的action提交，默认是这个类型
 
 以上三种方式，服务器会以不同的方式解析，这点尤其注意！！！！！
 
@@ -949,7 +1170,25 @@ get请求不存在设置`content-type`。只有post和put用到`content-type`，
 
 ### post:  application/json 
 
+- PC
+
+  ![](E:\self\记录\myNotes\images\contentType_2.png)
+
+- 小程序
+
 ![](E:\self\记录\myNotes\images\post_1.png)
+
+
+
+### post: application/x-www-form-urlencoded
+
+- PC
+
+  ![](E:\self\记录\myNotes\images\contentType_1.png)
+
+-   小程序
+
+![](E:\self\记录\myNotes\images\post_2.png)
 
 
 
@@ -998,7 +1237,7 @@ get请求不存在设置`content-type`。只有post和put用到`content-type`，
         name: PropTypes.string
     }
     
-    defaultProps = {
+    static defaultProps = {
         name: 'Stranger'
     }
   
@@ -1060,7 +1299,18 @@ class foo {
 
  上面的代码，一眼就能看出，`foo`类有两个实例属性，一目了然。另外，写起来也比较简洁。 
 
+外部添加实例属性
 
+```
+class foo {
+  constructor() {
+    // ...
+  }
+}
+
+foo.prototype.bar = 'hello';
+foo.prototype.baz = 'world';
+```
 
 
 
@@ -1080,7 +1330,21 @@ api: 【es6 - > Decorator 装饰器】
   
   class AddTransportDialog extends Component {
   }
-  
+  function mapStateToProps(state) {
+    return {
+      list: state.activityManage.skuDraftList,
+      loading: state.activityManage.skuListLoading,
+      updateLoading: state.activityManage.updateLoading,
+      switchLoading: state.activityManage.switchLoading,
+      switchId: state.activityManage.switchId,
+      categoryList: state.activityManage.categoryList,
+      saveLoading: state.activityManage.saveLoading,
+      batchSaveData: state.activityManage.batchSaveData,
+      updateRecommendLabelLoading: state.activityManage.updateRecommendLabelLoading,
+      recommendSwitchId: state.activityManage.recommendSwitchId,
+      skuInfo: state.activityManage.skuInfo
+    };
+  }
   export default connect(mapStateToProps)(Form.create()(AddTransportDialog))
   ```
 
@@ -1109,6 +1373,8 @@ api: 【es6 - > Decorator 装饰器】
 
 
 ## 超过出…悬浮出tooltip
+
+
 
 - Tooltip
 
@@ -1139,7 +1405,73 @@ api: 【es6 - > Decorator 装饰器】
 
   
 
+## table  Popover编辑
 
+```
+render: (text, record)=>{
+  return (<span>
+    ¥{text}
+    <Popover
+      trigger="click"
+      visible={this.state[`lineprice_${record.skuId}`]}
+      overlayClassName="TablePopover"
+      title="修改划线价"
+      content={<div>
+            <FormItem>
+              {getFieldDecorator(`edit_lineprice_${record.skuId}`, {
+                initialValue: text || '',
+                rules: [{
+                  required: true,
+                  message: '请输入'
+                }],
+              })(
+                <InputNumber className="skuInfoManage__inpNumber" size="small" min={0} placeholder="请输入"></InputNumber >
+              )}
+            </FormItem>
+            <div className="PopoverBtnBlock">
+              <Button loading={this.props.updateLoading} size="small" type="primary" onClick={() => this.updateLinePrice(record.skuId)}>确定</Button>
+            </div>
+          </div>}
+      onVisibleChange={visible =>
+        this.handleVisibleChange(`lineprice_${record.skuId}`, visible)
+      }
+    >
+      <Icon className="TableIcon" type="edit" />
+    </Popover>
+  </span>)
+}
+
+  handleVisibleChange(type, visible) {
+    this.setState({
+      [type]: visible,
+    });
+  }
+  
+  updateLinePrice(skuId) {
+  let key = `edit_lineprice_${skuId}`;
+  this.props.form.validateFields([key], (error, values)=>{
+    if (!error){
+      let linePrice = values[key]
+      
+      this.props.dispatch({
+        type: 'skuInfoManage/updateLinePrice',
+        data:{
+          linePrice,
+          skuId
+        },
+        callback: res=>{
+          if (res.code == 200){
+            this.handleVisibleChange(`lineprice_${skuId}`, false);
+            this.search(this.props.list.pageNo);
+          }
+        }
+      });
+
+      
+    }
+  })
+}
+```
 
 
 

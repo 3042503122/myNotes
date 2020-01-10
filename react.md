@@ -580,9 +580,11 @@ TodoItem.defaultProps = {
 
   1）性能比较高。因为他就是一个函数。
 
-  
 
 
+### PureComponent
+
+[React性能优化：PureComponent的使用原则](https://segmentfault.com/a/1190000018641319)
 
 
 

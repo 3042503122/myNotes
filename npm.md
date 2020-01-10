@@ -1,4 +1,4 @@
-# yarn
+#  yarn
 
 [api](https://yarnpkg.com/en/docs/cli/create)
 
@@ -8,7 +8,7 @@
 - `npm install taco --save` === `yarn add taco` —— taco包立即被保存到 `package.json` 中。
 - `npm uninstall taco --save` === `yarn remove taco`
 - `npm install taco --save-dev` === `yarn add taco --dev`
-- `npm update --save` === `yarn upgrade`
+  - `npm update --save` === `yarn upgrade`
 
 \-
 
@@ -90,6 +90,29 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 
 
+# 重新安装node_modules所有包
+
+## 快速删除node_modules
+
+当你的项目依赖了太多的包时，node_modules里的文件就变得特别的多，虽然不大，但是里面的文件太多，导致window删除时非常慢，现在就介绍一种相对于删除速度较快的方法
+
+------
+
+1. 全局安装rimraf：(已经安装)
+    `npm install rimraf -g`
+2. 到你的项目根目录下（即有node_modules的目录），执行命令：
+    `rimraf node_modules`
+
+## 安装
+
+```
+cnpm install
+```
+
+
+
+
+
 # 查看想要安装包的使用方法
 
 方法1： 
@@ -112,11 +135,31 @@ npm ls --depth=0
 
 
 
-# 查看包的最新版本
+# 查看包版本
+
+## 查看npm服务器上所有的jquery版本信息
+
+```
+npm view jquery versions
+```
+
+## 查看jquery的最新的版本
 
 ```
  //查看babel-loader的最新版本
  npm view babel-loader version
+```
+
+## 查看本地下载的jquery版本信息
+
+```
+npm ls jquery
+```
+
+## 查看全局下载安装的jquery
+
+```
+npm ls jquery -g
 ```
 
 

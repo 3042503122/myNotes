@@ -94,11 +94,11 @@ https://www.cnblogs.com/chuyanfenfei/p/8035067.html
 
 1. 点击settings
 
-   ![](E:\self\mahongluRecord\notes\images\github_1.png)
+   ![](E:\self\记录\myNotes\images\github_1.png)
 
 2. delete
 
-   ![](E:\self\mahongluRecord\notes\images\github_2.png)
+   ![](E:\self\记录\myNotes\images\github_2.png)
 
 # 新建仓库将项目
 
