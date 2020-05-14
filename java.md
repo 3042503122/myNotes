@@ -40,9 +40,21 @@ https://code.visualstudio.com/docs/java/java-tutorial
 
 ### 导入项目+启动项目
 
-首次启动项目：
+> 首次启动后端项目：
 
 ![](E:\self\记录\myNotes\images\java.png)
+
+> 修改后端代码重启项目
+
+![](E:\self\记录\myNotes\images\java3.png)
+
+
+
+> 启动前端项目 ,前端访问本地后端代码
+
+看package.json,  `npm run server`
+
+首次启动项目
 
 
 
