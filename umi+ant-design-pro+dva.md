@@ -447,6 +447,36 @@ Ant Design Pro 是一套基于 React 技术栈的单页面应用
 
 # 盲点
 
+## 表单隐藏域
+
+```
+  .hiddenFormItem{
+    padding: 0;
+    margin: 0;
+  }
+  .hiddenFormItem .ant-form-item-children{
+    display: none;
+  }
+```
+
+```
+        <FormItem className="hiddenFormItem">
+          {getFieldDecorator('couponKeyList', {
+            initialValue: couponList.reduce((o, el) => {
+              o = o + ',' + el.key;
+              return o;
+            }, '').slice(1),
+            rules: [
+              {
+                required: true,
+                message: '请添加优惠券',
+              },
+            ],
+          })(<Input />)}
+```
+
+
+
 ## 起项目、打包发布项目
 
 - 启动预发：使用预发接口 - `yarn start:no-mock` 使用mock`yarn start`
@@ -1076,6 +1106,98 @@ action=
 
 // 上传图片
 "https://dlupload.jd.com/uploadimg"
+```
+
+```
+// 表单取值
+  getValue = () => {
+    // if (this.props.config.couponList.length == 0) {
+    //   reject('添加优惠券');
+    // }
+    return new Promise((resolve, reject) => {
+      this.props.form.validateFields(['propagateUrl'], (error, values) => {
+          let param = {};
+          para.propagateUrl = `http://img11.360buyimg.com/dl/${
+            JSON.parse(values.propagateUrl.pop().response.data).pop().msg
+          }`
+          resolve(para);
+        } else {
+          reject(error);
+        }
+      });
+    });
+  };
+// dom项
+  normFile = e => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  };
+<FormItem label="图片">
+  {getFieldDecorator('propagateUrl', {
+    valuePropName: 'fileList',
+    getValueFromEvent: this.normFile,
+    rules: [
+      {
+        required: true,
+        message: '请上传',
+      },
+    ],
+  })(
+    <Upload.Dragger
+      accept=".png,.PNG,.jpg,.JPG,.jpeg,.JPEG"
+      listType="picture-card"
+      action="https://dlupload.jd.com/uploadimg"
+      showUploadList={false}
+      beforeUpload={file => {
+        if (file.type != 'image/png' && file.type != 'image/jpeg') {
+          message.warn('请上传jpg或png格式文件');
+          return false;
+        }
+        if (file.size > 200 * 1024) {
+          message.warn('请上传小于200KB的图片文件');
+          return false;
+        }
+        return true;
+      }}
+      onChange={info => {
+        if (info.file.status === 'uploading') {
+          this.setState({ propagateUrlLoading: true });
+          return;
+        }
+        if (info.file.status === 'done') {
+          // Get this url from response in real world.
+          this.setState({
+            propagateUrl: `http://img11.360buyimg.com/dl/${
+              JSON.parse(info.file.response.data).pop().msg
+            }`,
+            propagateUrlLoading: false,
+          });
+        }
+      }}
+    >
+      {propagateUrl ? (
+        <img src={propagateUrl} alt="avatar" style={{ width: '80%' }} />
+      ) : (
+        <div>
+          <p className="ant-upload-drag-icon">
+            <Icon type="inbox" />
+          </p>
+          <p className="ant-upload-text">上传图片(支持拖拽)</p>
+          <p className="ant-upload-hint">请上传jpg或png格式文件，大小不超过200KB。</p>
+        </div>
+      )}
+    </Upload.Dragger>
+  )}
+</FormItem>  
+  
+```
+
+```
+// 编辑时回显
+
 ```
 
 

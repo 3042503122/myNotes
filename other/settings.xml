@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"
+		  xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<localRepository>D:/repository</localRepository>
+
+	<profiles>
+		<profile>
+			<repositories>
+				<repository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>central</id>
+					<name>libs-releases</name>
+					<url>http://artifactory.jd.com/libs-releases</url>
+				</repository>
+				<!--<repository>
+                <snapshots>
+                <enabled>false</enabled>
+                </snapshots>
+                <id>cloudera</id>
+                <name>cdh-releases-rcs</name>
+                <url>https://repository.cloudera.com/content/groups/cdh-releases-rcs</url>
+                </repository>-->
+				<repository>
+					<snapshots/>
+					<id>snapshots</id>
+					<name>libs-snapshots</name>
+					<url>http://artifactory.jd.com/libs-snapshots</url>
+				</repository>
+				<repository>
+					<snapshots/>
+					<id>snapshots-local</id>
+					<name>libs-snapshots-local</name>
+					<url>http://artifactory.jd.com/libs-snapshots-local</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>central</id>
+					<name>plugins-releases</name>
+					<url>http://artifactory.jd.com/plugins-releases</url>
+				</pluginRepository>
+				<pluginRepository>
+					<snapshots/>
+					<id>snapshots</id>
+					<name>plugins-snapshots</name>
+					<url>http://artifactory.jd.com/plugins-snapshots</url>
+				</pluginRepository>
+			</pluginRepositories>
+			<id>artifactory</id>
+		</profile>
+		<profile>
+			<id>nexus</id>
+			<repositories>
+				<repository>
+					<id>maven-releases</id>
+					<url>http://192.168.202.217:8083/repository/maven-releases/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>maven-releases</id>
+					<url>http://192.168.202.217:8083/repository/maven-snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>maven-snapshots</id>
+					<url>http://192.168.202.217:8083/repository/maven-releases/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>maven-snapshots</id>
+					<url>http://192.168.202.217:8083/repository/maven-snapshots/</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+
+	</profiles>
+	<activeProfiles>
+		<activeProfile>artifactory</activeProfile>
+		<activeProfile>nexus</activeProfile>
+	</activeProfiles>
+	<servers>
+		<server>
+			<id>maven-releases</id>
+			<username>admin</username>
+			<password>admin123</password>
+		</server>
+
+		<server>
+			<id>maven-snapshots</id>
+			<username>admin</username>
+			<password>admin123</password>
+		</server>
+		<server>
+			<id>snapshots</id>
+			<username>username</username>
+			<password>AP255qvzfxUgakzHBAJ4xNC3Wsp</password>
+		</server>
+
+		<!-- <server>
+                 <id>jd-central</id>
+                 <username>admin</username>
+                 <password>jd1234</password>
+      </server>
+      <server>
+       <id>jd-snapshots</id>
+       <username>admin</username>
+       <password>jd1234</password>
+      </server>
+
+
+       <server>
+       <id>jd-central</id>
+       <username>chikaiming</username>
+       <password>chikaiming@jd.com1223</password>
+      </server>
+      <server>
+       <id>jd-snapshots</id>
+       <username>chikaiming</username>
+       <password>chikaiming@jd.com1223</password>
+      </server> -->
+
+	</servers>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>JD maven2 repository-snapshots</name>
+			<url>http://artifactory.jd.com/libs-snapshots-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+</settings>
