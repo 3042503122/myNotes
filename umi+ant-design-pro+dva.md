@@ -29,6 +29,8 @@ yarn start
 
 ->config/config.js routes
 
+[页面跳转2种方式：声明式、命令式|编程式-通过全局、命令式|编程式-通过属性](https://umijs.org/zh-CN/docs/navigate-between-pages)
+
 ### 主题
 
 [ 官网 ](https://v2-pro.ant.design/index-cn)
@@ -187,6 +189,43 @@ yarn start
      
 
 ### 请求 
+
+1. 安装axios，此应该在 -> 项目搭建 > 个性化项目 > package.json中安装了
+
+2. src / utils / http-p.js : 封装axios
+
+   copy myNotes / other / http-p.js
+
+3. src / service / x.js: 按模块集合
+
+   ```
+   import request from '@/utils/http-p';
+   
+   // get请求
+   export async function getPlans(params) {
+     return request({
+       url: '/cshopmission/planList',
+       body: params
+     });
+   }
+   
+   // post请求
+   export async function calcEndTime(params) {
+     return request({
+       url: '/cshopmission/calcMissionEndTime',
+       method: 'POST',
+       body: params,
+       options: {
+         responseType: 'json',
+         headers: {
+           'Content-Type': 'application/json;charset=UTF-8',
+         },
+       },
+     });
+   }
+   ```
+
+4. src / models / x.js: 引入service/x.js并使用  
 
 
 

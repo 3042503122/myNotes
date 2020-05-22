@@ -102,7 +102,41 @@ npm run start
 
 ### 请求
 
+1. 安装axios，此应该在 -> 项目搭建 > 个性化项目 > package.json中安装了
 
+2. src / utils / http-p.js : 封装axios
+
+   copy myNotes / other / http-p.js
+
+3. src / service / x.js: 按模块集合
+
+   ```
+   import request from '@/utils/http-p';
+   // get请求
+   export function getPlans(params) {
+     return request({
+       url: '/cshopmission/planList',
+       body: params
+     });
+   }
+   
+   // post请求
+   export function calcEndTime(params) {
+     return request({
+       url: '/cshopmission/calcMissionEndTime',
+       method: 'POST',
+       body: params,
+       options: {
+         responseType: 'json',
+         headers: {
+           'Content-Type': 'application/json;charset=UTF-8',
+         },
+       },
+     });
+   }
+   ```
+
+   
 
 ### mock数据
 
