@@ -14,15 +14,17 @@
 
 https://reactjs.org/docs/create-a-new-react-app.html
 
-# 快速开始
+# 搭建项目
 
-## 安装脚手架
+## 快速开始
+
+### 安装脚手架
 
 ```
  npm install -g create-react-app
 ```
 
-## 创建react应用
+### 创建项目
 
 https://github.com/facebook/create-react-app
 
@@ -60,11 +62,65 @@ yarn create react-app my-app
 
    
 
-## 启动react应用
+### 启动项目
 
 ```
 npm run start
 ```
+
+
+
+## 个性化项目
+
+### package.json
+
+### 配置
+
+
+
+### 路由
+
+[react-router-dom](https://juejin.im/post/5ec5d8d451882542e6477c25?utm_source=gold_browser_extension)
+
+### 样式
+
+- 全局样式
+
+  1. 新建 src / style /global.less
+
+  2. app.js 引入
+
+     ```
+     import './style/global.less'
+     ```
+
+      
+
+
+
+### 请求
+
+
+
+### mock数据
+
+
+
+## 最佳实践新增页面
+
+
+
+### 路由
+
+
+
+### 样式
+
+
+
+### 请求
+
+
 
 
 

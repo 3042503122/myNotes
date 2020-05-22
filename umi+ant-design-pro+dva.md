@@ -27,33 +27,220 @@ yarn start
 
 ### 路由
 
-
+->config/config.js routes
 
 ### 主题
+
+[ 官网 ](https://v2-pro.ant.design/index-cn)
+
+![](E:\self\记录\myNotes\rn\react_4.png)
+
+![](E:\self\记录\myNotes\rn\react_5.png)
+
+<img src="E:\self\记录\myNotes\rn\react_6.png" style="zoom: 67%;" />
 
 
 
 ### 样式
 
+[官网](https://pro.ant.design/docs/style-cn)
+
+- 全局样式
+
+  src / global.less
+
+- 页面级别 - css module
+
+  ```
+  export default class AddPurchaseDialog extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        visible: false,
+        loading: false, // 提交时loading
+      };
+    }
+  
+  
+    render() {
+      const { loading } = this.state;
+      const {
+        form: { getFieldDecorator, getFieldValue },
+        popShops,
+      } = this.props;
+  
+      return (
+        <div className={styles.bottomSubmit}>
+                <Button
+                  key="submit"
+                  type="primary"
+                  loading={loading}
+                  onClick={this.onOK}
+                  style={styles.btnMargin}
+                >
+                  确认
+                </Button>
+                <Button onClick={this.onClose}>取消</Button>
+              </div>
+      );
+    }
+  }
+  import styles from './index.less';
+  
+  ```
+
+  ```
+  // index.less
+  .bottomSubmit{
+  	display: flex;
+  	justify-content: flex-start;
+  }
+  .btnMargin{
+  	margin-right: 10px;
+  }
+  ```
+
+  样式文件默认使用 [CSS Modules](https://www.ruanyifeng.com/blog/2016/06/css_modules.html)，如果需要，你可以在样式文件的头部引入 [antd 样式变量文件](https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less)：
+
+  ```css
+  @import '~antd/lib/style/themes/default.less';
+  ```
+
+  这样可以很方便地获取 antd 样式变量并在你的文件里使用，有利于保持页面的一致性，也方便实现定制主题。
+
+- 页面级别 - 行内
+
+   ```
+     export default class AddPurchaseDialog extends Component {
+       constructor(props) {
+         super(props);
+       this.state = {
+           visible: false,
+         loading: false, // 提交时loading
+         };
+     }
+     
+     
+       render() {
+       const { loading } = this.state;
+         const {
+           form: { getFieldDecorator, getFieldValue },
+           popShops,
+         } = this.props;
+     
+         return (
+           <div style={styles.bottomSubmit}>
+                   <Button
+                     key="submit"
+                     type="primary"
+                     loading={loading}
+                     onClick={this.onOK}
+                     style={styles.btnMargin}
+                   >
+                     确认
+                   </Button>
+                   <Button onClick={this.onClose}>取消</Button>
+                 </div>
+         );
+       }
+     }
+     const styles = {
+       bottomSubmit: {
+         display: 'flex',
+         justifyContent: 'flex-end',
+         margin: '24px -24px -14px',
+         borderTop: '1px solid #e8e8e8',
+         paddingTop: '10px',
+         paddingRight: '24px',
+       },
+       btnMargin: {
+         marginRight: '10px',
+       },
+       inlineFormItem: { display: 'inline-block', width: 'calc(50% - 12px)' },
+       breakLine: { display: 'inline-block', width: '24px', textAlign: 'center', marginLeft: '-10px' },
+     };
+     
+   ```
+
+     
+
+### 请求 
 
 
-### 请求
+
+### mock数据
 
 
 
 ## 最佳实践新增页面
 
-
-
 ### 路由
 
+- step1: src/pages/xxx.jsx
+
+  ![](E:\self\记录\myNotes\rn\react_7.png)
+
+  文件夹结构pages
+
+  ├── 404.js
+  ├── ActivityManage
+  ├── Authorized.js
+  ├── Category
+  ├── document.ejs
+  ├── Exception
+  ├── LaunchManage
+  ├── MaterialManage
+  ├── PlanManage
+  ├── Report
+  └── ShopManage
+
+  Report文件夹
+
+  ├── DailyDetail
+  |  ├── components
+  |  |  ├── DailyDetailDialog.js
+  |  |  ├── DailyDetailSearchFilter.js
+  |  |  └── DailyDetailTable.js
+  |  └── index.js
+  ├── DailySummary
+  |  ├── components
+  |  |  ├── DailySummarySearchFilter.js
+  |  |  └── DailySummaryTable.js
+  |  └── index.js
+  ├── index.less
+  ├── Purchase
+  |  ├── components
+  |  |  ├── AddPurchaseDialog.js
+  |  |  ├── PurchaseSearchFilter.js
+  |  |  └── PurchaseTable.js
+  |  ├── index.js
+  |  └── index_cp.js
+  ├── Transport
+  |  ├── components
+  |  |  ├── AddTransportDialog.js
+  |  |  ├── TransportSearchFilter.js
+  |  |  └── TransportTable.js
+  |  └── index.js
+  └── Verification
+     ├── components
+     |  ├── AddVerficationDialog.js
+     |  ├── VerficationSearchFilter.js
+     |  └── VerficationTable.js
+     └── index.js
+
+  
+
+- step2: config/config.js 或者是 router.config.js中新增路由
+
+  **左侧导航顺序 ，由此项决定**
+
+- step3: src/locales/zh-CN.js -> menu.js 中 新增
+
+  ```
+  'menu.testadd': '测试新增页面'
+  ```
 
 
-### 样式
-
-
-
-### 请求
 
 
 
@@ -257,234 +444,6 @@ proxy: [
 Ant Design Pro 是一套基于 React 技术栈的单页面应用
 
 
-
-## 更改theme
-
-![](E:\self\记录\myNotes\rn\react_4.png)
-
-![](E:\self\记录\myNotes\rn\react_5.png)
-
-<img src="E:\self\记录\myNotes\rn\react_6.png" style="zoom: 67%;" />
-
-
-
-## 新增页面
-
-- step1: src/pages/xxx.jsx
-
-  ![](E:\self\记录\myNotes\rn\react_7.png)
-
-  文件夹结构pages
-
-  ├── 404.js
-  ├── ActivityManage
-  ├── Authorized.js
-  ├── Category
-  ├── document.ejs
-  ├── Exception
-  ├── LaunchManage
-  ├── MaterialManage
-  ├── PlanManage
-  ├── Report
-  └── ShopManage
-
-  Report文件夹
-
-  ├── DailyDetail
-  |  ├── components
-  |  |  ├── DailyDetailDialog.js
-  |  |  ├── DailyDetailSearchFilter.js
-  |  |  └── DailyDetailTable.js
-  |  └── index.js
-  ├── DailySummary
-  |  ├── components
-  |  |  ├── DailySummarySearchFilter.js
-  |  |  └── DailySummaryTable.js
-  |  └── index.js
-  ├── index.less
-  ├── Purchase
-  |  ├── components
-  |  |  ├── AddPurchaseDialog.js
-  |  |  ├── PurchaseSearchFilter.js
-  |  |  └── PurchaseTable.js
-  |  ├── index.js
-  |  └── index_cp.js
-  ├── Transport
-  |  ├── components
-  |  |  ├── AddTransportDialog.js
-  |  |  ├── TransportSearchFilter.js
-  |  |  └── TransportTable.js
-  |  └── index.js
-  └── Verification
-     ├── components
-     |  ├── AddVerficationDialog.js
-     |  ├── VerficationSearchFilter.js
-     |  └── VerficationTable.js
-     └── index.js
-
-  
-
-- step2: config/config.js 或者是 router.config.js中新增路由
-
-  **左侧导航顺序 ，由此项决定**
-
-- step3: src/locales/zh-CN.js -> menu.js 中 新增
-
-  ```
-  'menu.testadd': '测试新增页面'
-  ```
-
-- 样式
-
-  1. `src/global.less` 全局reset
-
-     —基本没改
-
-  2. `src/utils/utils.less` 这里可以放置一些工具函数供调用，比如清除浮动 `.clearfix`。
-
-     —基本没改
-
-  3. `src/components/TopNavHeader/index.less` 组件级，自动全局的
-
-     不用加:global()
-
-  4. `src/layouts/BasicLayout.less` 通用模块级，自动全局的
-
-     不用加:global()
-
-  5. `src/pages/Report/index.less`  
-
-     加:global() 才能全局
-
-  6. `src/pages/Report/DailyDetail/index.less` 页面级别样式，非全局
-
-     也可以.jsx 内部定义变量
-
-     1) 引入样式
-     
-     ```
-     export default class AddPurchaseDialog extends Component {
-       constructor(props) {
-         super(props);
-         this.state = {
-           visible: false,
-           loading: false, // 提交时loading
-         };
-       }
-     
-     
-       render() {
-         const { loading } = this.state;
-         const {
-           form: { getFieldDecorator, getFieldValue },
-           popShops,
-         } = this.props;
-     
-         return (
-           <div className={styles.bottomSubmit}>
-                   <Button
-                     key="submit"
-                     type="primary"
-                     loading={loading}
-                     onClick={this.onOK}
-                     style={styles.btnMargin}
-                   >
-                     确认
-                   </Button>
-                   <Button onClick={this.onClose}>取消</Button>
-                 </div>
-         );
-       }
-     }
-     import styles from './index.less';
-     
-     ```
-     
-     ```
-     // index.less
-     .bottomSubmit{
-     	display: flex;
-     	justify-content: flex-start;
-     }
-     .btnMargin{
-     	margin-right: 10px;
-     }
-     ```
-     
-
-     
-  
-   2) 行内样式
-  
-   ```
-     export default class AddPurchaseDialog extends Component {
-       constructor(props) {
-         super(props);
-       this.state = {
-           visible: false,
-         loading: false, // 提交时loading
-         };
-     }
-     
-     
-       render() {
-       const { loading } = this.state;
-         const {
-           form: { getFieldDecorator, getFieldValue },
-           popShops,
-         } = this.props;
-     
-         return (
-           <div style={styles.bottomSubmit}>
-                   <Button
-                     key="submit"
-                     type="primary"
-                     loading={loading}
-                     onClick={this.onOK}
-                     style={styles.btnMargin}
-                   >
-                     确认
-                   </Button>
-                   <Button onClick={this.onClose}>取消</Button>
-                 </div>
-         );
-       }
-     }
-     const styles = {
-       bottomSubmit: {
-         display: 'flex',
-         justifyContent: 'flex-end',
-         margin: '24px -24px -14px',
-         borderTop: '1px solid #e8e8e8',
-         paddingTop: '10px',
-         paddingRight: '24px',
-       },
-       btnMargin: {
-         marginRight: '10px',
-       },
-       inlineFormItem: { display: 'inline-block', width: 'calc(50% - 12px)' },
-       breakLine: { display: 'inline-block', width: '24px', textAlign: 'center', marginLeft: '-10px' },
-     };
-     
-   ```
-  
-     
-  
-  ​       
-  
-  1. 使用系统统一变量
-  2. 使用全局公共样式
-  3. 只是该页面的样式
-  
-  
-  
-  样式文件默认使用 [CSS Modules](https://www.ruanyifeng.com/blog/2016/06/css_modules.html)，如果需要，你可以在样式文件的头部引入 [antd 样式变量文件](https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less)：
-  
-  ```css
-  @import '~antd/lib/style/themes/default.less';
-  ```
-  
-  这样可以很方便地获取 antd 样式变量并在你的文件里使用，有利于保持页面的一致性，也方便实现定制主题。
 
 # dva
 
