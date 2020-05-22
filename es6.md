@@ -1,3 +1,9 @@
+# 参考资源
+
+- [阮一峰e6](https://es6.ruanyifeng.com/#docs/object)
+
+
+
 # promise | setTimeout
 
 代码：<https://codesandbox.io/s/x92bz>
@@ -165,7 +171,7 @@ Bar.classMethod() // "hello, too"
         name: PropTypes.string
     }
     
-    defaultProps = {
+    static defaultProps = {
         name: 'Stranger'
     }
   

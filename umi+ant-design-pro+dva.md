@@ -1,3 +1,62 @@
+# 搭建项目
+
+## 快速开始
+
+### 创建项目
+
+```
+// 安装脚手架
+$ npm install create-umi -g
+// 创建项目
+$ create-umi
+```
+
+### 启动项目
+
+```
+yarn start
+```
+
+## 个性化项目
+
+### package.json
+
+### 配置
+
+[官网](https://umijs.org/zh-CN/config)
+
+### 路由
+
+
+
+### 主题
+
+
+
+### 样式
+
+
+
+### 请求
+
+
+
+## 最佳实践新增页面
+
+
+
+### 路由
+
+
+
+### 样式
+
+
+
+### 请求
+
+
+
 # umi(脚手架)
 
 ## FAQ
@@ -25,14 +84,6 @@ $ npm create umi
 $ npm install create-umi -g
 $ create-umi
 ```
-
-
-
-- Link VS NavLink
-
-  [Link api](http://react-guide.github.io/react-router-cn/docs/API.html#link)
-
-
 
 ## config/config.js
 
@@ -204,10 +255,6 @@ proxy: [
 ## 定义
 
 Ant Design Pro 是一套基于 React 技术栈的单页面应用
-
-## 发请求
-
-使用umi框架提供的 `src/utils/request.js`
 
 
 

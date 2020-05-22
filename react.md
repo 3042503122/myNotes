@@ -14,13 +14,15 @@
 
 https://reactjs.org/docs/create-a-new-react-app.html
 
-# 安装脚手架
+# 快速开始
+
+## 安装脚手架
 
 ```
  npm install -g create-react-app
 ```
 
-# 创建react应用
+## 创建react应用
 
 https://github.com/facebook/create-react-app
 
@@ -58,11 +60,23 @@ yarn create react-app my-app
 
    
 
-# 启动react应用
+## 启动react应用
 
 ```
 npm run start
 ```
+
+
+
+## 路由
+
+### 参考资源
+
+[react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start)
+
+[最佳实践](https://codesandbox.io/s/react-router-dom-cqzll)
+
+## 样式
 
 
 
