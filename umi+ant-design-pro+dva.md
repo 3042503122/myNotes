@@ -108,6 +108,28 @@ yarn start
 
   这样可以很方便地获取 antd 样式变量并在你的文件里使用，有利于保持页面的一致性，也方便实现定制主题。
 
+  有时候希望在页面样式里使用全局样式，这样引入该less的文件以及文件内引入的子组件、孙组件......能不需要引入该less就能使用该className
+
+  ```
+  .title {
+    color: @heading-color;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  /* 定义多个全局样式 */
+  :global {
+    .footer {
+      color: #ccc;
+    }
+    .sider {
+      background: #ebebeb;
+    }
+  }
+  ```
+
+  
+
 - 页面级别 - 行内
 
    ```

@@ -6,10 +6,6 @@
 
   看package.json 启动项目
 
-
-
-
-
 # api
 
 https://reactjs.org/docs/create-a-new-react-app.html
@@ -94,7 +90,13 @@ npm run start
      import './style/global.less'
      ```
 
-      
+-  页面样式 - css module
+
+  同umi+ant-design-pro+dva.md 
+
+- 页面样式 - 行内
+
+  同umi+ant-design-pro+dva.md
 
 
 
