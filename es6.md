@@ -2,6 +2,16 @@
 
 - [阮一峰e6](https://es6.ruanyifeng.com/#docs/object)
 
+# 属性名表达式
+
+```
+let index =1;
+let obj = {
+    [`ecLegend[${index}].active`]: true,
+    ['a'+'bc']: 123
+};
+```
+
 
 
 # promise | setTimeout
