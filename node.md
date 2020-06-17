@@ -18,3 +18,11 @@ nvm install 8.9.2
 //nvm use （版本号）
 nvm use 8.9.2
 ```
+
+
+
+# 最佳实践
+
+## 批量下载线上图片到本地
+
+[参考](https://juejin.im/entry/57a30edf0a2b580058392cbd)
