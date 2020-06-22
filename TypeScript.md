@@ -104,16 +104,26 @@
    ```
 
    总之，还有很多使用 TypeScript 的好处，这里我就不一一列举了，感兴趣的小伙伴可以自己去查资料
+   
+   ![](E:\self\记录\myNotes\images\ts_1.png)
 
-## 参考文章
+
+
+# 参考文章
 
 [TypeScript 入门教程](<https://github.com/xcatliu/typescript-tutorial>)
 
 [TypeScript + 大型项目实战](https://www.jianshu.com/p/8610215a8a84 )
 
-## 基础
+[1.2W字 | 了不起的 TypeScript 入门教程](https://juejin.im/post/5edd8ad8f265da76fc45362c?utm_source=gold_browser_extension)
 
-### 原始数据类型
+[一文读懂 TypeScript 泛型及应用](https://juejin.im/post/5ee00fca51882536846781ee)
+
+# 基础
+
+## 基础类型
+
+### boolean|number|string原始数据类型
 
 ```
 //原始数据类型
@@ -125,7 +135,7 @@ nData = "2";
 sData = 1;
 ```
 
-### 任意值类型
+### any任意值类型
 
 > [任意值类型](<https://github.com/xcatliu/typescript-tutorial/blob/master/basics/any.md>)（Any）用来表示允许赋值为任意类型，
 
@@ -155,20 +165,111 @@ something = 7;
 something.setName('Tom');
 ```
 
-### 类型推论
+### Array数组类型
 
-> [类型推论 ](<https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-inference.md>)如果没有明确的指定类型，那么 TypeScript 会依照类型推论（Type Inference）的规则推断出一个类型。
-
-和any区别：**如果定义的时候没有赋值，不管之后有没有赋值，都会被推断成 any 类型而完全不被类型检查**：
+> [数组类型](https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-of-array.md)
 
 ```
-//以下代码虽然没有指定类型，但是会在编译的时候报错：
+// 表示法1：「类型 + 方括号」
+let fibonacci: number[] = [1, 1, 2, 3, 5];
 
-let myFavoriteNumber = 'seven';
-myFavoriteNumber = 7;
+// 表示法2：数组泛型
+let fibonacci: Array<number> = [1, 1, 2, 3, 5];
 
-// index.ts(2,1): error TS2322: Type 'number' is not assignable to type 'string'.
+// 表示法3：用接口表示数组
+interface NumberArray {
+	[index: string]: number;
+}
+let fibonacci: NumberArray = [1, 1] 
 ```
+
+### 元组
+
+> [元祖](<https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/tuple.md>) 数组合并了相同类型的对象，而元组（Tuple）合并了不同类型的对象。
+
+```
+let xcatliu: [string, number] = ['Xcat Liu', 25];
+```
+
+### enum枚举
+
+> [枚举](https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/enum.md) 枚举成员会被赋值为从 `0` 开始递增的数字，同时也会对枚举值到枚举名进行反向映射：
+
+1. **数字枚举**
+
+```
+// 枚举类型
+enum Days {
+  Sun,
+  Mon,
+  Tue,
+  Wed,
+  Thu,
+  Fri,
+  Sat
+}
+
+console.log(Days[0] === "Sun"); // true
+
+console.log(Days.Sun);// 0
+```
+
+手动赋值的枚举项也可以为小数或负数，此时后续未手动赋值的项的递增步长仍为 `1`
+
+```
+// 枚举类型
+enum Days {
+  Sun = 1,
+  Mon,
+  Tue,
+  Wed,
+  Thu,
+  Fri,
+  Sat
+}
+
+console.log(Days[1] === "Sun"); // true
+
+console.log(Days.Sun);// 1
+```
+
+2. **字符串枚举**
+
+   ```
+   enum Direction {
+     NORTH = "NORTH",
+     SOUTH = "SOUTH",
+     EAST = "EAST",
+     WEST = "WEST",
+   }
+   ```
+
+3. **异构枚举**
+
+   异构枚举的成员值是数字和字符串的混合
+
+   ```
+   enum Enum {
+     A,
+     B,
+     C = "C",
+     D = "D",
+     E = 8,
+     F,
+   }
+   ```
+
+### 字符串字面量 类型
+
+> [字符串字面量](<https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/string-literal-types.md>) 字符串字面量类型用来约束取值只能是某几个字符串中的一个。
+
+```
+type Sex = 'woman' | 'man';
+
+let zhangsan: Sex = 'man'
+```
+
+## 联合类型和类型别名
 
 ### 联合类型
 
@@ -180,9 +281,146 @@ myFavoriteNumber = 'seven';
 myFavoriteNumber = 7;
 ```
 
+### 类型别名
+
+> [类型别名](https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/type-aliases.md)用来给一个类型起个新名字。
+
+使用 `type` 创建类型别名 类型别名常用于联合类型。 类型别名常用于联合类型。
+
+```
+type Base = string | number | boolean;
+function padLeft(value: string, padding: Base) {
+  if (typeof padding === "number") {
+      return Array(padding + 1).join(" ") + value;
+  }
+  if (typeof padding === "string") {
+      return padding + value;
+  }
+  throw new Error(`Expected string or number, got '${padding}'.`);
+}
+```
 
 
-### 对象类型 - 接口
+
+```
+type Str = string;
+let aaa: Str = 'hello'
+
+type BN = boolean | number;
+let bbb: BN = true
+```
+
+注意，**类型别名与字符串字面量类型都是使用 type 进行定义。**
+
+## 交叉类型
+
+### 声明合并
+
+> [声明合并](https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/declaration-merging.md) 如果定义了两个相同名字的函数、接口或类，那么它们会合并成一个类型：
+
+
+
+1. 函数合并
+
+   ```
+   function reverse(x: number): number;
+   function reverse(x: string): string;
+   ```
+
+   相当于
+
+   ```
+   function reverse(x: number | string): number | string {
+       if (typeof x === 'number') {
+           return Number(x.toString().split('').reverse().join(''));
+       } else if (typeof x === 'string') {
+           return x.split('').reverse().join('');
+       }
+   }
+   ```
+
+2. 接口合并
+
+   ```
+   interface Alarm {
+       price: number;
+       alert(s: string): string;
+   }
+   interface Alarm {
+       weight: number;
+       alert(s: number): number;
+   }
+   ```
+
+   相当于
+
+   ```
+   interface Alarm {
+       price: number;
+       weight: number;
+       alert(s: string): string;
+       alert(s: string, n: number): string;
+   }
+   
+   ```
+
+   注意，**合并的属性的类型必须是唯一的**：
+
+   ```
+   interface Alarm {
+       price: number;
+   }
+   interface Alarm {
+       price: string;  // 类型不一致，会报错
+       weight: number;
+   }
+   
+   // index.ts(5,3): error TS2403: Subsequent variable declarations must have the same type.  Variable 'price' must be of type 'number', but here has type 'string'.
+   ```
+
+   接口中方法的合并，与函数的合并一样：
+
+3. 类的合并（同接口合并）
+
+## 函数
+
+> [函数类型](<https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-of-function.md>)
+
+```
+// 表示法1： 函数声明
+function say(msg1: string, repeat: number): string {
+	return msg1.repeat(repeat)
+}
+
+// 表示法2： 函数表达式
+let say = function(msg1: string, repeat: number): string {
+	return msg1.repeat(repeat)
+}
+
+// 表示法3： 用接口定义函数的形状
+interface SearchFunc {
+    (source: string, subString: string): boolean;
+}
+
+let mySearch: SearchFunc;
+mySearch = function(source: string, subString: string) {
+    return source.search(subString) !== -1;
+}
+
+// 可选参数、参数默认值
+function say(msg1: string, repeat?: number = 0): string {
+	return msg1.repeat(repeat)
+}
+
+// 剩余参数
+function addArr(arr, ...item: any): any[] {
+	items.forEach(function(item) {
+        array.push(item);
+    });
+} 
+```
+
+## 对象类型 - 接口
 
 > [对象类型](<https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-of-object-interfaces.md>) 在 TypeScript 中，我们使用接口（Interfaces）来定义对象的类型。
 
@@ -239,180 +477,7 @@ let tom: Person = {
 };
 ```
 
-
-
-### 数组类型
-
-> [数组类型](https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-of-array.md)
-
-```
-// 表示法1：「类型 + 方括号」
-let fibonacci: number[] = [1, 1, 2, 3, 5];
-
-// 表示法2：数组泛型
-let fibonacci: Array<number> = [1, 1, 2, 3, 5];
-
-// 表示法3：用接口表示数组
-interface NumberArray {
-	[index: string]: number;
-}
-let fibonacci: NumberArray = [1, 1] 
-```
-
-
-
-### 函数类型
-
-> [函数类型](<https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-of-function.md>)
-
-```
-// 表示法1： 函数声明
-function say(msg1: string, repeat: number): string {
-	return msg1.repeat(repeat)
-}
-
-// 表示法2： 函数表达式
-let say = function(msg1: string, repeat: number): string {
-	return msg1.repeat(repeat)
-}
-
-// 表示法3： 用接口定义函数的形状
-interface SearchFunc {
-    (source: string, subString: string): boolean;
-}
-
-let mySearch: SearchFunc;
-mySearch = function(source: string, subString: string) {
-    return source.search(subString) !== -1;
-}
-
-// 可选参数、参数默认值
-function say(msg1: string, repeat?: number = 0): string {
-	return msg1.repeat(repeat)
-}
-
-// 剩余参数
-function addArr(arr, ...item: any): any[] {
-	items.forEach(function(item) {
-        array.push(item);
-    });
-} 
-```
-
-
-
-### 内置对象
-
-> [内置对象](https://github.com/xcatliu/typescript-tutorial/blob/master/basics/built-in-objects.md) 中有很多[内置对象](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)，它们可以直接在 TypeScript 中当做定义好了的类型。
->
-> 内置对象是指根据标准在全局作用域（Global）上存在的对象。这里的标准是指 ECMAScript 和其他环境（比如 DOM）的标准。
-
-
-
-### 类型断言
-
-> [类型断言](https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-assertion.md) 类型断言（Type Assertion）可以用来手动指定一个值的类型。
-
-```
-//表示法1： <类型>值
-function toBoolean(something: string | number): boolean {
-    return <boolean>something;
-}
-
-//表示法1：值 as 类型
-```
-
-
-
-### ???声明文件
-
-
-
-## 进阶
-
-### 类型别名
-
-> [类型别名](https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/type-aliases.md)用来给一个类型起个新名字。
-
-使用 `type` 创建类型别名 类型别名常用于联合类型。 类型别名常用于联合类型。
-
-```
-type Str = string;
-let aaa: Str = 'hello'
-
-type BN = boolean | number;
-let bbb: BN = true
-```
-
-注意，**类型别名与字符串字面量类型都是使用 type 进行定义。**
-
-
-
-### 字符串字面量 类型
-
-> [字符串字面量](<https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/string-literal-types.md>) 字符串字面量类型用来约束取值只能是某几个字符串中的一个。
-
-```
-type Sex = 'woman' | 'man';
-
-let zhangsan: Sex = 'man'
-```
-
-
-
-### 元组
-
-> [元祖](<https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/tuple.md>) 数组合并了相同类型的对象，而元组（Tuple）合并了不同类型的对象。
-
-```
-let xcatliu: [string, number] = ['Xcat Liu', 25];
-```
-
-
-
-### 枚举
-
-> [枚举](https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/enum.md) 枚举成员会被赋值为从 `0` 开始递增的数字，同时也会对枚举值到枚举名进行反向映射：
-
-```
-// 枚举类型
-enum Days {
-  Sun,
-  Mon,
-  Tue,
-  Wed,
-  Thu,
-  Fri,
-  Sat
-}
-
-console.log(Days[0] === "Sun"); // true
-
-console.log(Days.Sun);// 0
-```
-
-手动赋值的枚举项也可以为小数或负数，此时后续未手动赋值的项的递增步长仍为 `1`
-
-```
-// 枚举类型
-enum Days {
-  Sun = 1,
-  Mon,
-  Tue,
-  Wed,
-  Thu,
-  Fri,
-  Sat
-}
-
-console.log(Days[1] === "Sun"); // true
-
-console.log(Days.Sun);// 1
-```
-
-
-
-### 类
+## 类
 
 > [类](https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/class.md)
 
@@ -440,6 +505,86 @@ let a: Animal = new Animal("Jack");
 console.log(a.sayHi()); // My name is Jack
 
 ```
+
+> 访问器
+
+在 TypeScript 中，我们可以通过 `getter` 和 `setter` 方法来实现数据的封装和有效性校验，防止出现异常数据。
+
+```
+let passcode = "Hello TypeScript";
+
+class Employee {
+  private _fullName: string;
+
+  get fullName(): string {
+    return this._fullName;
+  }
+
+  set fullName(newName: string) {
+    if (passcode && passcode == "Hello TypeScript") {
+      this._fullName = newName;
+    } else {
+      console.log("Error: Unauthorized update of employee!");
+    }
+  }
+}
+
+let employee = new Employee();
+employee.fullName = "Semlinker";
+if (employee.fullName) {
+  console.log(	employee.fullName);
+}
+```
+
+## 泛型
+
+
+
+## 其它
+
+### 内置对象
+
+> [内置对象](https://github.com/xcatliu/typescript-tutorial/blob/master/basics/built-in-objects.md) 中有很多[内置对象](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)，它们可以直接在 TypeScript 中当做定义好了的类型。
+>
+> 内置对象是指根据标准在全局作用域（Global）上存在的对象。这里的标准是指 ECMAScript 和其他环境（比如 DOM）的标准。
+
+
+
+### 类型断言
+
+> [类型断言](https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-assertion.md) 类型断言（Type Assertion）可以用来手动指定一个值的类型。
+
+```
+//表示法1： <类型>值
+function toBoolean(something: string | number): boolean {
+    return <boolean>something;
+}
+
+//表示法1：值 as 类型
+```
+
+### 类型推论
+
+> [类型推论 ](<https://github.com/xcatliu/typescript-tutorial/blob/master/basics/type-inference.md>)如果没有明确的指定类型，那么 TypeScript 会依照类型推论（Type Inference）的规则推断出一个类型。
+
+和any区别：**如果定义的时候没有赋值，不管之后有没有赋值，都会被推断成 any 类型而完全不被类型检查**：
+
+```
+//以下代码虽然没有指定类型，但是会在编译的时候报错：
+
+let myFavoriteNumber = 'seven';
+myFavoriteNumber = 7;
+
+// index.ts(2,1): error TS2322: Type 'number' is not assignable to type 'string'.
+```
+
+
+
+### ???声明文件
+
+
+
+## 进阶
 
 
 
@@ -571,71 +716,3 @@ console.log(a.sayHi()); // My name is Jack
    ```
 
    
-
-### 声明合并
-
-> [声明合并](https://github.com/xcatliu/typescript-tutorial/blob/master/advanced/declaration-merging.md) 如果定义了两个相同名字的函数、接口或类，那么它们会合并成一个类型：
-
-
-
-1. 函数合并
-
-   ```
-   function reverse(x: number): number;
-   function reverse(x: string): string;
-   ```
-
-   相当于
-
-   ```
-   function reverse(x: number | string): number | string {
-       if (typeof x === 'number') {
-           return Number(x.toString().split('').reverse().join(''));
-       } else if (typeof x === 'string') {
-           return x.split('').reverse().join('');
-       }
-   }
-   ```
-
-2. 接口合并
-
-   ```
-   interface Alarm {
-       price: number;
-       alert(s: string): string;
-   }
-   interface Alarm {
-       weight: number;
-       alert(s: number): number;
-   }
-   ```
-
-   相当于
-
-   ```
-   interface Alarm {
-       price: number;
-       weight: number;
-       alert(s: string): string;
-       alert(s: string, n: number): string;
-   }
-   
-   ```
-
-   注意，**合并的属性的类型必须是唯一的**：
-
-   ```
-   interface Alarm {
-       price: number;
-   }
-   interface Alarm {
-       price: string;  // 类型不一致，会报错
-       weight: number;
-   }
-   
-   // index.ts(5,3): error TS2403: Subsequent variable declarations must have the same type.  Variable 'price' must be of type 'number', but here has type 'string'.
-   ```
-
-   接口中方法的合并，与函数的合并一样：
-
-3. 类的合并（同接口合并）
