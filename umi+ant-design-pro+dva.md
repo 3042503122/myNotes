@@ -1,6 +1,6 @@
 # 搭建项目
 
-## 快速开始
+## 快速开始(umi2)
 
 ### 创建项目
 
@@ -16,6 +16,45 @@ $ create-umi
 ```
 yarn start
 ```
+
+
+
+## 快速开始(umi3)
+
+[官网](https://umijs.org/zh-CN/docs/getting-started)
+
+### 创建项目
+
+ node 版本是 10.13 或以上
+
+```
+// 创建项目
+yarn create @umijs/umi-app
+// 安装依赖
+yarn
+```
+
+### 启动项目
+
+```
+yarn start
+```
+
+### 修改配置
+
+// 编辑 `.umirc.ts` 配置 `layout: {}`
+
+```
+import { defineConfig } from 'umi';
+export default defineConfig({
++ layout: {},
+  routes: [
+    { path: '/', component: '@/pages/index' },
+  ],
+});
+```
+
+
 
 ## 个性化项目
 

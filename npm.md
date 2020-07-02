@@ -88,9 +88,22 @@ npm config set registry http://registry.npmjs.org
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 
+# 实用工具包
 
+## 树形目录结构
 
-# 重新安装node_modules所有包
+[tree-cli](http://sunshiyong.com/2018/05/13/tree-win/) 快速生成指定深度的树形目录结构
+
+```
+// 安装
+npm install -g tree-cli
+
+// 展示一级所有文件 以及目录（前边带 /）
+tree -f
+
+// 展示到二级
+tree -l 2
+```
 
 ## 快速删除node_modules
 
@@ -99,19 +112,9 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 ------
 
 1. 全局安装rimraf：(已经安装)
-    `npm install rimraf -g`
+   `npm install rimraf -g`
 2. 到你的项目根目录下（即有node_modules的目录），执行命令：
-    `rimraf node_modules`
-
-## 安装
-
-```
-cnpm install
-```
-
-
-
-
+   `rimraf node_modules`
 
 # 查看想要安装包的使用方法
 

@@ -16,25 +16,6 @@ git reset HEAD^
 
 
 
-# 工具
-
-## tree-cli
-
-[tree-cli](http://sunshiyong.com/2018/05/13/tree-win/) 快速生成指定深度的树形目录结构
-
-```
-// 安装
-npm install -g tree-cli
-
-// 展示一级所有文件 以及目录（前边带 /）
-tree -f
-
-// 展示到二级
-tree -l 2
-```
-
-
-
 # 规范提交信息
 
 [书写良好的 commit message](https://loveky.github.io/2018/06/04/write-good-commit-message/)
@@ -72,6 +53,25 @@ tree -l 2
 
 
 # 小技巧
+
+## git查看项目地址
+
+```
+git remote -v
+```
+
+
+
+## git撤销commit，但未git push的命令
+
+在git push的时候，有时候我们会想办法撤销git commit的内容 
+1、找到之前提交的git commit的id 
+git log 
+找到想要撤销的id 
+2、git reset –hard id 
+完成撤销,同时将代码恢复到前一commit_id 对应的版本 
+3、git reset id 
+完成Commit命令的撤销，但是不对代码修改进行撤销，可以直接通过git commit 重新提交对本地代码的修改
 
 ## 撤销 merge
 

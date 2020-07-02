@@ -1278,7 +1278,7 @@ yarn add react-redux
 
 ## 基本流程
 
-![](E:\self\myNotes\rn\redux_1.png)
+![](E:\self\记录\myNotes\rn\redux_1.png)
 
 > action creators
 
