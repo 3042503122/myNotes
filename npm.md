@@ -193,3 +193,41 @@ npm install -g npm@6.0.1  更新最新版本
 npm install -g npm@latest
 ```
 
+
+
+# 分享：jnpm发包
+
+## 介绍
+
+npm 是一种包管理的工具，目前的前端界已经离不开了它。它的出现让我们能通过 `npm install [name]` 的方式将别人的优秀代码模块引入到自己的项目中。这些优秀的模块能被共享的原因，离不开 npm 包管理工具和 npm 仓库
+
+虽然目前已经有很多成熟的 npm 源可以使用，但出于**稳定性**、**私密性**、**安全性**等方面的考虑搭建自己公司的私有仓库完全有必要。
+
+参考资料：[jnpm官网](http://npm.m.jd.com/)
+
+## FQA
+
+1. npm 镜像地址：https://registry.npmjs.org/，https://www.npmjs.com/package/antd这又哪，包又是在哪下载的
+2. npm源是什么 安
+
+## 常见npm镜像地址
+
+| npm    | https://registry.npmjs.org/      |
+| ------ | -------------------------------- |
+| yarn   | https://registry.yarnpkg.com/    |
+| cnpm   | http://r.cnpmjs.org/             |
+| taobao | https://registry.npm.taobao.org/ |
+| jnpm   | http://registry.m.jd.com/        |
+
+注意：通常安装cnpm，并且cnpm改为淘宝安装镜像
+
+```
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
+
+## 查看某一镜像地址
+
+```
+npm|cnpm get registry
+```
+

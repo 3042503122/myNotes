@@ -60,7 +60,7 @@ export default defineConfig({
 
 ### package.json
 
-### 配置
+### 配置（config/config.js）
 
 [官网](https://umijs.org/zh-CN/config)
 
@@ -529,6 +529,17 @@ proxy: [
     "pathRewrite": { "^/api" : "" }
   }
 }
+
+"proxy": {
+   '/api': {
+       target: 'http://newbeta-fire-operate-soa.jd.com',
+       changeOrigin: true,
+    },
+    '/packapi': {
+       target: 'http://beta-cbuild.jd.com',
+       changeOrigin: true,
+    }
+}
 ```
 
 `mainfest`: umi模板自动生成
@@ -813,11 +824,9 @@ class Child extends PureComponent {
   -  options.rules 
 
     - 【错误提示】message 
-  
-    - 【是否必填】required: true | false
-  
+  - 【是否必填】required: true | false
     - 【类型校验】type
-      - `email`: Must be of type `email`.
+    - `email`: Must be of type `email`.
       - `string`: Must be of type `string`. `This is the default type.`
       - `number`: Must be of type `number`.
       - `boolean`: Must be of type `boolean`.
@@ -831,16 +840,19 @@ class Child extends PureComponent {
       - `date`: Value must be valid as determined by `Date`
       - `url`: Must be of type `url`.
       - `hex`: Must be of type `hex`.
-  
     - 【正则表达式校验】pattern
     
-    ​          手机号：` /^1[3-9][0-9]{9}$/`
+  ​          手机号：` /^1[3-9][0-9]{9}$/`
     
     ​          数字：`/^[1-9][0-9]*$/`
     
     ​	       自然数：`/^0|([1-9][0-9]*)$/`0,1，..
     
     ​          skuId: `/^-?([1-9][0-9]*)(\.[0-9]*)?$/`
+    
+    ​          渠道号：`/^(\d|[a-z]|-|_)+$/` 不超过50个字符,必须为数字、英文、_、-的组合
+    
+    ​         APP名称: `/^[a-zA-Z0-9\u4e00-\u9fa5]+$/` 汉字、数字、英文字母
     
     ​          价格：正整数或浮点数小数点后最多保留2位`/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/`
     
@@ -916,10 +928,10 @@ class Child extends PureComponent {
           callback('不能大于当前时间');
           }
         }
-        callback();
-  },
-    ```
-  
+      callback();
+    },
+  ```
+    
       // 不能重复
     
       ```
