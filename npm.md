@@ -167,11 +167,13 @@ npm ls jquery -g
 
 
 
-# 报错：npm ERR! code EPERM npm ERR! errno -4048
+# 报错：
+
+## npm ERR! code EPERM npm ERR! errno -4048
 
 ![](E:\self\记录\myNotes\images\npm_1.png)
 
-## step1: 清除[npm](https://www.baidu.com/s?wd=npm&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd)缓存
+### step1: 清除[npm](https://www.baidu.com/s?wd=npm&tn=24004469_oem_dg&rsv_dl=gh_pl_sl_csd)缓存
 
 ```
 npm cache clean --force
@@ -179,7 +181,7 @@ npm cache clean --force
 
 仍然报上述错误，step2
 
-## step2: 更新npm版本
+### step2: 更新npm版本
 
 ```
 npm -v  查看当前版本为5.0.1
@@ -192,6 +194,16 @@ npm install -g npm@6.0.1  更新最新版本
 ```
 npm install -g npm@latest
 ```
+
+## npm ERR! code EINTEGRITY
+
+![](E:\self\记录\myNotes\images\npm_2.png)
+
+## Error: listen EADDRNOTAVAIL
+
+解决方法：dev.js中 host: '[brandpage.jd.com](http://brandpage.jd.com/)', 软件switchHosts里有 [brandpage.jd.com](http://brandpage.jd.com/) host正在应用（即严格拷贝^上3中的host 并应用）
+
+![](E:\self\记录\myNotes\images\npm_3.png)
 
 
 

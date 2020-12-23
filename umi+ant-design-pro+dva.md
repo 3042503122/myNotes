@@ -842,26 +842,27 @@ class Child extends PureComponent {
       - `hex`: Must be of type `hex`.
     - 【正则表达式校验】pattern
     
+  
   ​          手机号：` /^1[3-9][0-9]{9}$/`
-    
+  
     ​          数字：`/^[1-9][0-9]*$/`
-    
+  
     ​	       自然数：`/^0|([1-9][0-9]*)$/`0,1，..
-    
+  
     ​          skuId: `/^-?([1-9][0-9]*)(\.[0-9]*)?$/`
-    
+  
     ​          渠道号：`/^(\d|[a-z]|-|_)+$/` 不超过50个字符,必须为数字、英文、_、-的组合
-    
+  
     ​         APP名称: `/^[a-zA-Z0-9\u4e00-\u9fa5]+$/` 汉字、数字、英文字母
-    
+  
     ​          价格：正整数或浮点数小数点后最多保留2位`/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/`
-    
-    ​          不能包含特殊字符：`/[[`~!@#$^&*()=|{}':;',\\[\\].<> 《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]/`
-    
+  
+    ​          不能包含特殊字符：`/[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/`
+  
     ​           [其他](https://juejin.im/post/5dccdd24f265da0c09156fb3?utm_source=gold_browser_extension)
-    
+  
     ​                                         
-    
+  
     - 【自定义规则】validator:  function(rule, value, callback) {  callback() }
     
       自定义校验（注意，[callback 必须被调用](https://github.com/ant-design/ant-design/issues/5155)） 
@@ -897,7 +898,7 @@ class Child extends PureComponent {
       ```
     
       // 和表单里的其他项比较
-    
+  
     ```
       {
       validator: (rule, value, callback) => {
@@ -930,10 +931,10 @@ class Child extends PureComponent {
         }
       callback();
     },
-  ```
-    
+    ```
+  
       // 不能重复
-    
+        
       ```
     validator: (rule, value, callback) =>{
         if (!value) {
@@ -954,15 +955,15 @@ class Child extends PureComponent {
         }
       }
       ```
-    
+  
     - 【字符串长度】len
     
     - 【字符串最小长度】min
     
     - 【字符串最大长度】max
-    
+  
     ​          
-    
+  
     ​          
   
   ```
