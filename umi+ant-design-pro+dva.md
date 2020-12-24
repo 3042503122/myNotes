@@ -1379,7 +1379,17 @@ action=
   }            
 ```
 
+### 文件上传最佳实践
 
+同一个弹窗组件record，即可以新增、也可以编辑（回显），
+
+目前该组件问题：编辑首次打开，【上传】应该是【重新上传】，不知道为什么getFieldValue('uploadFile')获取不到第一次打开回显值
+
+代码运行：`src\pages\packaging\components\record.jsx`
+
+copy代码：`\myNotes\other\record.jsx`
+
+<img src="E:\self\记录\myNotes\images\umi_3.png" style="zoom:80%;" />
 
 ## content-type
 
