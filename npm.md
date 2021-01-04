@@ -243,3 +243,12 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 npm|cnpm get registry
 ```
 
+
+
+# 背后原理
+
+## npm insall 包名 
+
+https://blog.csdn.net/qiwoo_weekly/article/details/103839779
+
+https://zhuanlan.zhihu.com/p/128625669

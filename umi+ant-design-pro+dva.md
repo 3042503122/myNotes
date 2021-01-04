@@ -9,12 +9,18 @@
 $ npm install create-umi -g
 // 创建项目
 $ create-umi
+// 安装依赖
+cnpm install
 ```
+
+如何选择gitbash里对应的项？选择第一项 键入1 + 回车
+
+![](E:\self\记录\myNotes\images\umi2_1.png)
 
 ### 启动项目
 
 ```
-yarn start
+npm run start
 ```
 
 
@@ -26,6 +32,8 @@ yarn start
 ### 创建项目
 
  node 版本是 10.13 或以上
+
+先找个地方建个空目录，在该目录下执行下命令
 
 ```
 // 创建项目
@@ -41,6 +49,8 @@ yarn start
 ```
 
 ### 修改配置
+
+如果项目的配置不复杂，推荐在 `.umirc.ts` 中写配置； 如果项目的配置比较复杂，可以将配置写在 `config/config.ts` 中，并把配置的一部分拆分出去，比如路由配置可以拆分成单独的 `routes.ts`
 
 // 编辑 `.umirc.ts` 配置 `layout: {}`
 
