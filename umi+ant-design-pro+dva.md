@@ -17,6 +17,14 @@ cnpm install
 
 ![](E:\self\记录\myNotes\images\umi2_1.png)
 
+![](E:\self\记录\myNotes\images\umi2_2.png)
+
+*Do you need all the blocks or a simple scaffold?* 
+
+[all the blocks]所有的ant.pro页面(即官网上https://preview.pro.ant.design/dashboard所有的)，可以进行学习
+
+[simple]简单的的登录页，这里可以进行antd版本配置 ,即老项目都使用的这个
+
 ### 启动项目
 
 ```
