@@ -28,7 +28,10 @@ fiddler很强大，但是比较复杂。whistle就比较简单了。基于上 �
 - [一文搞定前端代理骚操作！再也不怕线上bug啦！](https://juejin.cn/post/6859305679006466055)
 - [Whistle实用功能介绍](https://blog.csdn.net/luckywinty/article/details/103415060)
 
+# 插件
 
+- [whistle.vase](https://github.com/whistle-plugins/whistle.vase)
+- [whistle.inspect](https://github.com/whistle-plugins/whistle.inspect)
 
 # 最佳实践
 

@@ -37,6 +37,8 @@ npm run start
 
 [官网](https://umijs.org/zh-CN/docs/getting-started)
 
+[Umi3与Antd-Pro5中后台全栈项目实战](https://juejin.cn/post/6904109633985183758#heading-13)
+
 ### 创建项目
 
  node 版本是 10.13 或以上
@@ -1409,66 +1411,6 @@ copy代码：`\myNotes\other\record.jsx`
 
 <img src="E:\self\记录\myNotes\images\umi_3.png" style="zoom:80%;" />
 
-## content-type
-
-get请求不存在设置`content-type`。只有post和put用到`content-type`，常用的post方式，所以这里着重说post。
- post的content-type三种类型：
-
-- Content-Type: application/json
-   对于axios，post的时候`axios.post(url,{a:1,b:2})`，第二个参数是对象的时候，默认是这个类型
-
-- Content-Type: application/x-www-form-urlencoded
-   对于axios，post的时候`let data = {a:1,b:2}; axios.post(url,qs.stringify({ data }))`，第二个参数是字符串的时候，默认是这个类型
-
-  **文件上传二进制流是此类型**
-
-   - Content-Type: multipart/form-data
-      对于axios，post的时候`let data = new FormData(); data.append('a',1'); data.append('b',2); axios.post(url,data)`，参数是formData类型的时候，默认是这个类型，如果用form自带的action提交，默认是这个类型
-
-以上三种方式，服务器会以不同的方式解析，这点尤其注意！！！！！
-
-- Content-Type:text/html
-
-- Content-Type:text/plain
-
-- Content-Type:text/css
-
-- Content-Type:text/javascript
-
-- Content-Type:application/xml
-
-### post:  application/json 
-
-- PC
-
-  ![](E:\self\记录\myNotes\images\contentType_2.png)
-
-- 小程序
-
-![](E:\self\记录\myNotes\images\post_1.png)
-
-
-
-### post: application/x-www-form-urlencoded
-
-- PC
-
-  ![](E:\self\记录\myNotes\images\contentType_1.png)
-
--   小程序
-
-![](E:\self\记录\myNotes\images\post_2.png)
-
-
-
-### get
-
-无content-type
-
-参数：Query String parameters
-
-![](E:\self\记录\myNotes\images\get.png)
-
 
 
 ## static
@@ -1755,4 +1697,4 @@ render: (text, record)=>{
 
 项目中.git文件夹中：如果没有说明是隐藏文件，设置显示隐藏文件
 
-删除`\.git\hooks\pre-commit`
+删除`\.git\hooks\pre-commit` 
