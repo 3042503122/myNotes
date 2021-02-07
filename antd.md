@@ -138,6 +138,38 @@ disabledDate={(current) => {
 }}
 ```
 
+## 最长可选365天
+
+```
+<Form.Item label="任务时间" {...formItemLayout}>
+            {getFieldDecorator('taskTime', {
+              initialValue: '',
+            })(
+              <DatePicker.RangePicker 
+                renderExtraFooter={() => '最长可选365天'} 
+                allowClear={false}
+                disabledDate={current => {
+                  const rangeDate = this.state.rangeDate;
+                  if (!rangeDate || rangeDate.length === 0) {
+                      return false;
+                  }
+                  if (current.diff(rangeDate[0], 'days') > 365) {
+                      return true
+                  }
+                  return false;
+                }
+              }
+              onCalendarChange={value => {
+                this.setState({
+                  rangeDate: value
+                });
+              }}
+              
+              />
+            )}
+          </Form.Item>
+```
+
 
 
 ## 用Input代替InputNumber

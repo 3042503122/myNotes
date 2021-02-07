@@ -1,3 +1,22 @@
+# 安装包
+
+## dependencies
+
+- `ahooks`
+- `qs`
+- 
+
+## devDependencies
+
+- `cross-env`
+- 
+
+# 谁在使用
+
+- [新活动配置平台](https://coding.jd.com/activities/activity-manage)
+- [京东极速版APP专用运营端](https://coding.jd.com/zhouran8/jdlite-manage/)
+- [区区购新后台管理平台](http://coding.jd.com/app/ququgou_admin/)
+
 # 搭建项目
 
 ## 快速开始(umi2)
@@ -76,6 +95,26 @@ export default defineConfig({
 
 
 
+## 登录|退出登录
+
+使用京东内网单点登录
+
+// 退出登录
+
+// ssa会清掉cookie, 无需自己清
+
+```
+location.href = `https://ssa.jd.com/sso/logout?ReturnUrl=${encodeURIComponent(location.domain)}`
+```
+
+// 登录
+
+```
+location.href = `https://ssa.jd.com/sso/login?ReturnUrl=${encodeURIComponent(location.href)}`
+```
+
+
+
 ## 个性化项目
 
 ### package.json
@@ -89,6 +128,24 @@ export default defineConfig({
 ->config/config.js routes
 
 [页面跳转2种方式：声明式、命令式|编程式-通过全局、命令式|编程式-通过属性](https://umijs.org/zh-CN/docs/navigate-between-pages)
+
+动态路由
+
+```
+              {
+                path: '/v2/session_manage/session/edit/:id',
+                name: 'edit', // 修改任务
+                component: './SessionManage/Session/edit',
+              },
+              
+                handleEditSession(id) {
+    router.push(`./edit/${id}`);
+  }
+  
+  this.props.match.params.id
+```
+
+
 
 ### 主题
 
@@ -579,6 +636,60 @@ Ant Design Pro 是一套基于 React 技术栈的单页面应用
 # dva
 
 [api](https://dvajs.com/guide/introduce-class.html#目前最流行的数据流方案)
+
+
+
+# 表单页
+
+## 基础表单
+
+### input
+
+- 带校验
+
+  ```
+  					<FormItem label="计划名称" {...formItemLayout}>
+  						{getFieldDecorator('planName', {
+  							initialValue: this.props.type != 'new' ? this.props.record.planName : undefined,
+  							validateTrigger: 'onBlur',
+  							rules: [{
+  								required: true,
+  								message: '请输入'
+  							}, {
+  								max: 20,
+  								message: '最多支持输入20个字'
+  							}, {
+  								validator: (rule, value, callback)=>{
+  									if (this.props.type != 'new'){
+  										callback();
+  										return null;
+  									}
+  									if (!value){
+  										callback();
+  									} else {
+  										this.props.dispatch({
+  											type: 'planManage/validPlanName',
+  											param: {
+  												planName: value
+  											},
+  											callback: res => {
+  												if (res.code == 200){
+  													callback();
+  												} else {
+  													callback(res.msg);
+  												}
+  											}
+  										});
+  									}
+  								}
+  							}]
+  						})(
+  							<Input placeholder="最多支持输入20个字" disabled={edit || view} />
+  						)}
+  					</FormItem>
+  ```
+
+  
 
 
 

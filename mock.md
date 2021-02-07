@@ -10,11 +10,11 @@
 
 1. 下载安装<https://nginx.org/en/download.html>
 
-   ![](E:\self\mahongluRecord\notes\images\ngix_1.png)
+   ![](E:\self\记录\myNotes\images\ngix_1.png)
 
 2. 安装 此为绿色版：双击即可
 
-   ![](E:\self\mahongluRecord\notes\images\ngix_2.png)
+   ![](E:\self\记录\myNotes\images\ngix_2.png)
 
 3. 浏览器输入：127.0.0.1( 也可以用swtichH指定host) 成功，该显示的是 ngix/html/index.html
 

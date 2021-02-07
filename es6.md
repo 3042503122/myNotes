@@ -1,4 +1,4 @@
-# 参考资源
+# 	参考资源
 
 - [阮一峰e6](https://es6.ruanyifeng.com/#docs/object)
 

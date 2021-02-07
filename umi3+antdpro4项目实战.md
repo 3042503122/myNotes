@@ -18,7 +18,7 @@
 
 # 🔨搭建项目
 
-### 🚀快速开始(umi2)
+## 快速开始(umi2)
 
 ### 创建项目
 
@@ -135,7 +135,7 @@ src/locales/zh-CN\menu.js
 
 src/pages/settle
 
-## 新建models
+## 新建services
 
 src/models/settle.js
 
@@ -171,7 +171,7 @@ export async function getDetailList(data) {
 
 
 
-## 新建services
+## 新建models
 
 src/services/settle.js
 
@@ -345,3 +345,48 @@ export default {
 
 
 # 🌚 FAQ
+
+# 🚀代码片段
+
+## 带后端校验的Input
+
+```
+{getFieldDecorator('planName', {
+							initialValue: this.props.type != 'new' ? this.props.record.planName : undefined,
+							validateTrigger: 'onBlur',
+							rules: [{
+								required: true,
+								message: '请输入'
+							}, {
+								max: 20,
+								message: '最多支持输入20个字'
+							}, {
+								validator: (rule, value, callback)=>{
+									if (this.props.type != 'new'){
+										callback();
+										return null;
+									}
+									if (!value){
+										callback();
+									} else {
+										this.props.dispatch({
+											type: 'planManage/validPlanName',
+											param: {
+												planName: value
+											},
+											callback: res => {
+												if (res.code == 200){
+													callback();
+												} else {
+													callback(res.msg);
+												}
+											}
+										});
+									}
+								}
+							}]
+						})(
+							<Input placeholder="最多支持输入20个字" disabled={edit || view} />
+						)}
+```
+
