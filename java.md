@@ -68,5 +68,64 @@ https://code.visualstudio.com/docs/java/java-tutorial
 
 
 
+# java入门
+
+## jdk
+
+包管理
+
+### 安装
+
+### 使用
 
 
+
+### jre
+
+## idea
+
+### 安装
+
+- ultimate: 企业版
+
+- community: 社区版，免费，👈
+
+  正常双击安装
+
+  <img src="E:\self\记录\myNotes\images\java_7.png" style="zoom:67%;" />
+
+  <img src="E:\self\记录\myNotes\images\java_8.png" style="zoom:67%;" />
+
+### 第一次启动
+
+<img src="E:\self\记录\myNotes\images\java_9.png" style="zoom:67%;" />
+
+<img src="E:\self\记录\myNotes\images\java_10.png" style="zoom:67%;" />
+
+<img src="E:\self\记录\myNotes\images\java_11.png" style="zoom:67%;" />
+
+​                                      配置一下
+
+<img src="E:\self\记录\myNotes\images\java_12.png" style="zoom:67%;" />
+
+如果安装好jdk, 下图中【No SDK】选择 1.8已安装的sdk
+
+<img src="E:\self\记录\myNotes\images\java_14.png" style="zoom:50%;" />
+
+### 新建项目并启动
+
+<img src="E:\self\记录\myNotes\images\java_15.png" style="zoom:50%;" />
+
+<img src="E:\self\记录\myNotes\images\java_16.png" style="zoom:50%;" />
+
+<img src="E:\self\记录\myNotes\images\java_17.png" style="zoom: 67%;" />
+
+<img src="E:\self\记录\myNotes\images\java_18.png" style="zoom:50%;" />
+
+启动项目代码上右键 Run ***
+
+<img src="E:\self\记录\myNotes\images\java_19.png" style="zoom:50%;" />
+
+### 移植项目并启动
+
+'Open or Import'
