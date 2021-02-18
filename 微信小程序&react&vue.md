@@ -92,6 +92,19 @@ this.processID = '123'
 
 ### 路由
 
+```
+// 跳转页面-命令式
+this.$router.push({
+        name: "verifyDetail",
+        params: { applicantNumber, taskType, status},
+        query: { applicantNumber, taskType, status}
+});
+// 获取路由参数
+this.$route.query
+```
+
+
+
 ## antdpro(react)
 
 ### state
@@ -99,6 +112,26 @@ this.processID = '123'
 ### 生命周期
 
 ### 路由
+
+```
+// router.config.js
+{
+  path: '/v2/session_manage/session/edit/:id',
+  name: 'edit', // 修改任务
+  component: './SessionManage/Session/edit',
+}
+```
+
+
+
+```
+import { history } from 'umi';
+// 跳转页面-命令式
+const id = 123;
+history.push(`./edit/${id}`);
+// 获取路由参数
+this.props.match.params
+```
 
 
 
@@ -138,7 +171,83 @@ export const getShowWorkTask = (params) => {
 }
 ```
 
-### models
+### stores
+
+#### actions
+
+#### modules
+
+```
+// verify.js
+import {
+  getListData
+} from '../../api/verify';
+
+export default {
+  namespaced: true,
+  
+  state: {
+    WorkTaskKey: {},
+  },
+  getters,
+  actions: {
+    [ActionTypes.GET_SHOW_WORK_TASK]: async (context, params) => {
+    let res = await getShowWorkTask(params);
+    if (res.status === 200 && res.data) {
+      context.commit(ActionTypes.GET_SHOW_WORK_TASK, {
+        info: res.data.FlowForm,
+        ...params
+      });
+      context.commit(ActionTypes.SET_DATA_DETAIL, params);
+    }
+    },
+  },
+  mutations:{
+      [ActionTypes.SET_DATA_DETAIL]: (state, data) => {
+        debugger;
+        state.WorkTaskKey = data;
+      },
+  }
+}
+```
+
+### view
+
+```
+// verify.vue
+<script>
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapGetters, mapActions } = createNamespacedHelpers("verify");
+
+export default {
+  data() {
+    return {
+      ProcessID: null
+    };
+  },
+  computed: {
+    ...mapState({
+      otherAttachmentList: state => state.showWorkTask.otherAttachmentList,
+    }),
+    ...mapGetters(["workListCount", "finishListCount"]),
+  },
+  methods: {
+    ...mapActions({
+      getShowWorkTask: 'GET_SHOW_WORK_TASK'
+    }),
+    ...mapMutations({
+      emptySearchUserList: ActionTypes.EMPTY_USER_SEARCH_LIST
+    }),
+  },
+  mounted () {
+    this.emptySearchUserList();
+    this.getShowWorkTask();
+  }, 
+}
+</script>
+```
+
+
 
 ## antdpro(react)
 
