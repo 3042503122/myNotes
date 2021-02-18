@@ -65,15 +65,36 @@ Classname 与 Style
 
 
 
-# 逻辑层
+# 组件实例
 
 ## vue
+
+### data
+
+```
+// 定义
+data() {
+    return {
+      processID: ''
+    };
+},
+
+// get-js
+this.processID
+// get-html
+{{processID}}
+
+// set
+this.processID = '123'
+```
 
 ### 生命周期
 
 ### 路由
 
 ## antdpro(react)
+
+### state
 
 ### 生命周期
 
@@ -121,7 +142,7 @@ export const getShowWorkTask = (params) => {
 
 ## antdpro(react)
 
-### service
+### services
 
 ```
 // session.js
@@ -210,6 +231,30 @@ export default {
 				list: {},
 			};
 		},
+  }
+}
+```
+
+## pages
+
+```
+// session.js
+@connect(({session}) => ({
+  loading: session.listLoading,
+  list: session.list
+}))
+export default class SessionList extends PureComponent {
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'session/getList',
+      data: param,
+    });
+  }
+  
+  render() {
+     // this.props.loading
+     // this.props.list
   }
 }
 ```
