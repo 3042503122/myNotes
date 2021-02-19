@@ -316,3 +316,24 @@ public class Instance {
 
 <img src="E:\self\记录\myNotes\images\java_25.png" style="zoom:80%;" />
 
+## 数据类型
+
+![](E:\self\记录\myNotes\images\java_30.jpg)
+
+![](E:\self\记录\myNotes\images\java_31.jpg)
+
+## ArrayList类
+
+- 是java内置的数据集合(ava.util.*)，用于存储多个数据结构
+
+- 是数组替代品，提供更多的数据操作方法
+
+- 方法
+
+  <img src="E:\self\记录\myNotes\images\java_29.png" style="zoom:80%;" />
+
+## 使用第三方提供的服务
+
+使用[阿里云天气预发](https://market.aliyun.com/data?spm=5176.8060107.1387859.3.5c302854MNUw3p)，[阿里云天气预报接口](https://market.console.aliyun.com/imageconsole/index.htm?spm=5176.6660585.774526198.1.7c4b6bf8PzzIcw#/bizlist?_k=ko637o)
+
+👁️‍🗨️![](E:\self\记录\myNotes\images\java_31.png)
