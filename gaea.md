@@ -1,4 +1,4 @@
-![](E:\self\mahongluRecord\notes\images\gaea_2.png)
+![](E:\self\记录\myNotes\images\gaea_2.png)
 
  https://github.com/jdf2e/Gaea4
 
@@ -31,6 +31,6 @@
 
 ![]()
 
-![gaea_1](E:\self\mahongluRecord\notes\images\gaea_1.png)
+![gaea_1](E:\self\记录\myNotes\images\gaea_1.png)
 
 ## 

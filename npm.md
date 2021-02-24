@@ -40,6 +40,29 @@
 
 [dependencies 和 devDependencies区别](https://blog.csdn.net/csdn_yudong/article/details/83721870)
 
+# package.json里scripts
+
+```
+"scripts": {
+  "test": "tap test/*.js"
+}
+
+// 可以替换下，也就是说本地 node_modules .bin文件夹下有相应的
+// node_modules/.bin/tap 是哪来的？当 tap 源码配置了 bin 定义时，就会被安装的时候，自动软链了过去。
+"scripts": {
+  "test": "node_modules/.bin/tap test/*.js"
+}
+
+//  tap 源码
+{
+ "name": "tap",
+ "bin": {
+   "tap": "./bin/tap"
+ }
+}
+
+```
+
 
 
 # 查看编辑npm配置

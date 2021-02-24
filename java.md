@@ -337,3 +337,25 @@ public class Instance {
 使用[阿里云天气预发](https://market.aliyun.com/data?spm=5176.8060107.1387859.3.5c302854MNUw3p)，[阿里云天气预报接口](https://market.console.aliyun.com/imageconsole/index.htm?spm=5176.6660585.774526198.1.7c4b6bf8PzzIcw#/bizlist?_k=ko637o)
 
 👁️‍🗨️![](E:\self\记录\myNotes\images\java_31.png)
+
+**步骤：**
+
+1. 获取第三方接口AppKey、AppCode
+
+2. 下载jar包
+
+   ![](E:\self\记录\myNotes\images\java_32.png)
+
+3.  将jar包导入到本地项目
+
+   新建目录：lib
+
+   <img src="E:\self\记录\myNotes\images\java_33.png" style="zoom: 80%;" />
+
+   导入jar包
+
+   ![](E:\self\记录\myNotes\images\java_34.png)
+
+​       学习jar原代码
+
+​        <img src="E:\self\记录\myNotes\images\java_35.png" style="zoom:67%;" />

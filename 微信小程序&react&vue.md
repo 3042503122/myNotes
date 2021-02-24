@@ -1,8 +1,44 @@
 # 视图层
 
+## 微信小程序
+
+```
+<text class="ordergroup__name">{{computed.getTeamType(content.teamType)}}</text>
+<wxs module="computed">
+    module.exports = {
+        getTeamType: function(type) {
+            //团类型，2 今日团购 0秒杀团
+            var team = '';
+            switch (type) {
+                case 0:
+                    team = '秒杀团';
+                    break;
+                case 2:
+                    team = '今日团购';
+                    break;
+                default:
+                    team = '';
+                    break;
+            } 
+            return team;
+        }
+    }
+</wxs>
+```
+
+### 包装元素(不会在页面中做任何渲染)
+
+```
+<block></block>
+```
+
+
+
 ##  vue
 
 ### 声明、条件、循环
+
+{{}}或者属性值里是data、computed、props、methods里值，其他不行
 
 ```
 // 声明
@@ -16,9 +52,16 @@
 // 循环
 <ol>
     <li v-for="todo in todos">
+      <img v-if="isImg(todo.name)" :src="m.url" alt="" preview>
       {{ todo.text }}
     </li>
  </ol>
+ 
+  methods: {
+    isImg: function(name) {
+      return isImg(name);
+    },
+  }
 ```
 
 ### Class 与 Style
@@ -27,11 +70,21 @@
 
 ### 事件处理
 
+### 插槽slot
+
+### 包装元素(不会在页面中做任何渲染)
+
+```
+<template v-if="ok"></template>
+```
+
 
 
 ## antdpro(react)
 
 ### 声明、条件、循环
+
+{}里只要是变量、函数都可以。this.state.*  this.props.* 或者其他任何导入的函数
 
 ```
 // 声明
@@ -62,6 +115,12 @@ Classname 与 Style
 ### 事件处理
 
 ### 插槽slot
+
+### 包装元素(不会在页面中做任何渲染)
+
+```
+<></>
+```
 
 
 

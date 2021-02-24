@@ -512,3 +512,4 @@ data > prop > components > filter > computed >  watch >
 
 [轻松掌握vuex，让你对状态管理有一个更深的理解](https://juejin.im/post/5d37a791f265da1b7153369a?utm_source=gold_browser_extension#heading-8)
 
+# 盲点
