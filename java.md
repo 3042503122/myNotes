@@ -359,3 +359,25 @@ public class Instance {
 ​       学习jar原代码
 
 ​        <img src="E:\self\记录\myNotes\images\java_35.png" style="zoom:67%;" />
+
+# 数据库
+
+## MySQL数据库安装与初始化
+
+### 下载
+
+[下载**Windows (x86, 32-bit), MSI Installer** ](https://dev.mysql.com/downloads/windows/installer/8.0.html)
+
+![](E:\self\记录\myNotes\images\mysql_1.png)
+
+### 安装
+
+![](E:\self\记录\myNotes\images\mysql_2.png)
+
+![](E:\self\记录\myNotes\images\mysql_3.png)
+
+后边都是【finish】 => 【next】
+
+那么安装到什么位置了呢？？？`C:\Program Files\MySQL\MySQL Server 8.0`
+
+`C:\Program Files\MySQL\MySQL Server 8.0\bin`里边打开看一下？？？
