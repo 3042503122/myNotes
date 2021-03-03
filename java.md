@@ -380,4 +380,70 @@ public class Instance {
 
 那么安装到什么位置了呢？？？`C:\Program Files\MySQL\MySQL Server 8.0`
 
-`C:\Program Files\MySQL\MySQL Server 8.0\bin`里边打开看一下？？？
+### 系统环境变量=》全局命令
+
+`C:\Program Files\MySQL\MySQL Server 8.0\bin`里边打开看一下？？？里边都是管理mySql指令，可以执行的命令
+
+<img src="E:\self\记录\myNotes\images\mysql_4.png" style="zoom:67%;" />
+
+验证：
+
+<img src="E:\self\记录\myNotes\images\mysql_5.png" style="zoom: 80%;" />
+
+### mysql客户端
+
+安装mysql时，我们不安装mysql shell(mysql客户端) 因为实在不好用，我们安装**HeidiSQL**
+
+- 调出来操作面板
+
+  【新建查询】
+
+  <img src="E:\self\记录\myNotes\images\mysql_6.png" style="zoom:80%;" />
+
+## SQL语言
+
+
+
+### SQL语句注意事项
+
+- SQL语句不区分大小写，但是字符串区分大小写
+
+  ```
+  SELECT "HelloWorld";
+  ```
+
+- SQL语句必须以分号结尾
+
+- SQL语句中的空白和换行没有限制，但是不能破坏语法
+
+- SQL语句的注释
+
+  ```
+  # 这是单行注释
+  /*多行注释*/
+  ```
+
+  
+
+## 数据类型
+
+![](E:\self\记录\myNotes\images\mysql_9.png)
+
+![](E:\self\记录\myNotes\images\mysql_8.png)
+
+## 约束
+
+| 主键约束 | PRIMARY KEY | `id INT UNSIGNED PRIMARY KEY ` |
+| -------- | ----------- | ------------------------------ |
+| 非空约束 | NOT NULL    | `birthday DATE NOT NULL `      |
+| 唯一约束 |             |                                |
+| 外键约束 |             |                                |
+|          |             |                                |
+
+
+
+## 索引运行机制和使用原则
+
+- 排序为什么可以提高数据检索速度
+- 怎么创建和删除索引
+- 什么条件下使用索引
