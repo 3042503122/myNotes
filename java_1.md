@@ -88,11 +88,9 @@
 | 简单查询   | `SELECT ... FROM ... `                                       | `SELECT * From t_emp` 、 `SELECT empno,ename From t_emp`、<br/>`SELECT empno,ename,sal*12 AS "income" From t_emp` |
 | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 数据分页   | `SELECT ... FROM ... LIMIT 起始位置,偏移量 `                 | `SELECT empno,ename From t_emp LIMIT 0,10`                   |
-| 结果集排序 | `SELECT ... FROM ... ORDER BY 列名 [ASC|DESC],列名 [ASC|DESC],。。。 `
-如果不写[ASC\|DESC]默认ASC | `SELECT empno,ename,sal From t_emp ORDER BY SAL`<br/>`SELECT empno,ename,sal From t_emp ORDER BY SAL,ename ASC` |
+| 结果集排序 | `SELECT ... FROM ... ORDER BY 列名 [ASC|DESC],列名 [ASC|DESC],。。。 `不写[ASC\|DESC]默认ASC | `SELECT empno,ename,sal From t_emp ORDER BY SAL`<br/>`SELECT empno,ename,sal From t_emp ORDER BY SAL,ename ASC` |
 | 结果集去重 | `SELECT DISTINCT 列名 FROM ... LIMIT`<br/>使用distinct的select子句中只能查询一列数据，如果查询多列去重记录就会失效 | `SELECT DISTINCT job From t_emp`                             |
 | 条件查询   | `SELECT ... FROM ...WHERE 条件 [AND|OR] 条件 。。。 `        | 查询10部门里工资大于2000的员工信息<br/>SELECT ename,empno,sal <br/>From t_emp<br/>WHERE deptno=10 AND sal>=2000; <br/><br/>查询10部门和20部门里工资大于2000的员工信息<br/>SELECT ename,deptno,sal <br/>From t_emp<br/>WHERE (deptno=10 OR deptno=20) AND sal>=2000; |
-
 
 
 准备工作导入表(不用自己新建表和数据)
