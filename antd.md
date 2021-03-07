@@ -472,3 +472,10 @@ this.props.dispatch({
 />
 ```
 
+
+
+# FAQ
+
+## 表单提交红色校验文字不显示
+
+可能是validator里面报错了，validator报错不展示无法感知
