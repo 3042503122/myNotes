@@ -406,7 +406,7 @@ public class Instance {
 
 ![](E:\self\记录\myNotes\images\mysql_8.png)
 
-## mySql提供的工具函数
+## mySql提供的基本函数
 
 - IFNULL(列名, 默认值)
 - DATEDIFF(NOW(), 日期列名)：NOW当前日期 - 日期别名
@@ -530,6 +530,8 @@ step1: 新建数据库
 step2: 导入
 
 <img src="E:\self\记录\myNotes\images\mysql_10.png" style="zoom:80%;" />
+
+##### 高级查询
 
 ### DCL
 

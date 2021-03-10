@@ -1401,4 +1401,4 @@ import thunk from 'redux-thunk';
 
 fiddler模拟ajax数据
 
-![](E:\self\mahongluRecord\notes\rn\react_3.png)
+![](E:\self\mahongluRecord\notes\rn\react_3.png)	

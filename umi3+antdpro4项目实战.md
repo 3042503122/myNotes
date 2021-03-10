@@ -63,6 +63,28 @@ npm run start
 
 
 
+### 打包部署
+
+背景：package.json => scripts
+
+栗子👁️‍🗨️：区区购
+
+<img src="E:\self\记录\myNotes\images\umi_4.png"  />
+
+栗子👁️‍🗨️：火眼渠道端
+
+<img src="E:\self\记录\myNotes\images\umi_6.png"  />
+
+栗子👁️‍🗨️：火眼运营端
+
+<img src="E:\self\记录\myNotes\images\umi_7.png"  />
+
+### 线上彩蛋方便定位问题
+
+![](E:\self\记录\myNotes\images\umi_5.png)
+
+
+
 ### router.config.js
 
 config.js
