@@ -146,6 +146,20 @@ https://code.visualstudio.com/docs/java/java-tutorial
 
 ### 打包
 
+-  声明打包
+
+  遗留问题：第三方包是否需要打到自己jar包里？？？
+
+  ![](E:\self\记录\myNotes\images\java_36.png)
+
+- 打包：最后out>...>weather.jar就是可以运行的jar
+
+  ![](E:\self\记录\myNotes\images\java_37.png)
+
+- 使用打包成功的jar,测试打好的包是否能运行
+
+  ![](E:\self\记录\myNotes\images\java_38.png)
+
 ### 模板
 
 #### 自带模板
