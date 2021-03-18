@@ -88,6 +88,14 @@ https://code.visualstudio.com/docs/java/java-tutorial
 
 ## idea
 
+### 优点
+
+- 丰富的模板支持
+
+  如输入【sout+回车】自动生成打印
+
+- 丰富的快捷键
+
 ### 安装
 
 - ultimate: 企业版
@@ -133,6 +141,52 @@ https://code.visualstudio.com/docs/java/java-tutorial
 ### 移植项目并启动
 
 'Open or Import'
+
+### 运行调试
+
+### 打包
+
+### 模板
+
+#### 自带模板
+
+【ctrl + shift + a =>输入 live template】
+
+| 常用模板       | 描述 |
+| -------------- | ---- |
+| sout           |      |
+| serr           |      |
+| fori           |      |
+| itar           |      |
+| itli           |      |
+| psvm 或者 main |      |
+|                |      |
+
+<img src="E:\self\记录\myNotes\images\mysql_17.png"  />
+
+![](E:\self\记录\myNotes\images\mysql_18.png)
+
+#### 自定义模板
+
+<img src="E:\self\记录\myNotes\images\mysql_19.png" style="zoom:80%;" />
+
+### 快捷键
+
+| 快捷键                          | 描述                             |
+| ------------------------------- | -------------------------------- |
+| 【ctrl + alt + s】              | setting面板                      |
+| 【ctrl + shift + F\|R】         | 全局查找 \| 替换                 |
+| 【ctrl + shift + N】            | 文件查找                         |
+| 【ctrl + shift + A】*****       | 查找action                       |
+| 【alt + insert】                | 快速生成面板                     |
+| 【ctrl + ←→】 配合 【ctrl + w】 | 光标按单词左移右移 配合 选中单词 |
+| 【ctrl + alt + shift + j】      | 列操作                           |
+| 【shift + F6】                  | 重命名                           |
+| 【ctrl + shift + enter】        | 自动输入结尾分号；               |
+| 【alt + enter】*                | 智能提示                         |
+|                                 |                                  |
+
+
 
 ## 新建 class
 
