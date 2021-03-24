@@ -70,6 +70,8 @@
 
 ### 事件处理
 
+
+
 ### 插槽slot
 
 ### 包装元素(不会在页面中做任何渲染)
@@ -200,6 +202,60 @@ this.props.match.params
 
 ### props
 
+### 自定义事件
+
+```
+//  父组件
+<template>
+<blog-post
+  ...
+  v-on:enlarge-text="doSomething"
+></blog-post>
+</template>
+<script>
+export default {
+    data(){
+        return{
+          postFontSize: 10
+        }
+    },
+    methods: {
+      doSomething(step) {
+        this.postFontSize += step
+      }
+    }
+}
+</script>
+<style lang="scss" scoped>
+</style>
+
+```
+
+```
+// 子组件
+<template>
+<button v-on:click="">
+  Enlarge text
+</button>
+</template>
+<script>
+export default {
+    data(){
+        return{}
+    },
+    methods: {
+      enlarge() {
+        this.$emit('enlarge-text',1)
+      }
+    }
+}
+</script>
+<style lang="scss" scoped>
+</style>
+```
+
+
+
 ### 插槽slot
 
 ### 
@@ -207,6 +263,8 @@ this.props.match.params
 ## antdpro(react)
 
 ### props
+
+### 自定义事件
 
 ### 插槽slot
 
