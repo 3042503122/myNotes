@@ -428,3 +428,215 @@ public class Instance {
 
 ​        <img src="E:\self\记录\myNotes\images\java_35.png" style="zoom:67%;" />
 
+# Maven
+
+## 周内容
+
+### Maven构建工具
+
+### 工厂模式
+
+### 反射机制
+
+### Lambda表达式
+
+## Maven构建工具
+
+| 内容          | 说明                 | 重要程度 |
+| ------------- | -------------------- | -------- |
+| Maven核心特性 | 介绍Maven特性        |          |
+| Maven依赖管理 | 依赖包管理及处理过程 |          |
+| Maven工程打包 | 常用命令以及打包     |          |
+
+### 定义
+
+项目管理工具，对软件项目提供构建和依赖管理。
+
+Maven是Apache下的java开源项目
+
+Maven为java项目提供了统一的管理方式，已成为业界标准
+
+### 背景
+
+1）工程结构不统一；软件开发有很多ide, eclipse、sun自己开发的ide等等每一种ide创建项目彼此之间没有约定都是不同的 文件夹路径都不同，eclipse开发的项目放到idea中无法加载
+
+2）包查找下载困难；集中管理下载jar包的地方
+
+3）工程打包复杂；java项目打包：.jar(标准java项目)、 .war(发布在web服务器上)
+
+基于上述Maven应运而生
+
+### 安装及配置
+
+准备工作：1）已经安装好jdk 2)系统环境变量配置JAVA_HOME `D:\java\jdk1.8.0_181` 
+
+安装工作：1）[下载](http://maven.apache.org/download.cgi) - Binary zip archive  2）加压缩  3）配置path `D:\apache-maven-3.6.0\bin`  
+
+小tip: 配置了 path可以在全局cmd使用 `nvm -v`（因为D:\apache-maven-3.6.0\bin\mvn.cmd） 
+
+## 新建java工程
+
+groupId: 机构或者团体的英文名称，采用逆向域名形式书写 例如com.jd
+
+ArtifactId: 项目名称，说明其用途，例如： cms、oa...
+
+Version: 版本号，一般采用“版本+单词”形式，例如1.0.0.RELEASE
+
+项目目录结构:
+
+![](E:\self\记录\myNotes\images\java_40.png)
+
+## Maven依赖管理
+
+![](E:\self\记录\myNotes\images\java_45.png)
+
+- 利用dependency(依赖)自动下载、管理第三方Jar
+
+- 在pom.xml文件中配置项目依赖的第三方组件
+
+- 自动将依赖从远程仓库下载至本地仓库，并在工程中引用
+
+- 使用
+
+  ```
+      <dependencies>
+          <dependency>
+              <groupId>junit</groupId>
+              <artifactId>junit</artifactId>
+              <version>4.11</version>
+              <scope>test</scope>
+          </dependency>
+          ...
+       <dependencies>
+  
+  
+  ```
+
+  pom.xml增加此并保持后，自动从[远程仓库](https://search.maven.org/)下载，下载后从下截图位置可见
+
+  ![](E:\self\记录\myNotes\images\java_41.png)
+
+  如果junit本身依赖10个其他包，都会自动下载，但是dependency中无体现
+
+- 本地仓库 VS 中央仓库
+
+  【maven】启动本地maven项目===> 对【pom.xml】加载，分析里边有什么dependency依赖 ===》 在【本地仓库：.m2\repository】查找这些依赖是否存在，查找某个dependency的jar包不存在 ===》【中央仓库：repo.maven.apache.org】下载到【本地仓库：.m2\repository】
+
+  **总是在apache外国官网下载依赖包，太慢了怎么解决？**中央仓库国内也有代理最有名的是[阿里](https://maven.aliyun.com/mvn/guide)的（类似淘宝npm镜像），怎么才能让项目从代理下载
+
+  - 找到代理url
+
+    ![](E:\self\记录\myNotes\images\java_43.png)
+
+  
+
+  - 项目和代理 url关联
+
+    ```
+    // pom.xml
+    <repositories>
+            <!--   创建私服的地址     -->
+            <repository>
+                <id>aliyun</id>
+                <name>aliyun</name>
+                <url>https://maven.aliyun.com/repository/public</url>
+            </repository>
+            ...
+        </repositories>
+    ```
+
+    
+
+## 项目的运行编译打包
+
+都在这个面板下
+
+| 命令    | 描述           |
+| ------- | -------------- |
+| clean   | 清除产生的项目 |
+| install | 安装至本地     |
+| package | 项目打包       |
+| compile | 编译源代码     |
+| test    | 执行测试用例   |
+|         |                |
+
+<img src="E:\self\记录\myNotes\images\java_46.png" style="zoom:80%;" />
+
+## 项目打包
+
+maven通过**maven-assembly-plugin**(plugin插件)将java项目打包为jar、war包
+
+**本讲**
+
+```
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.5</version>
+                <configuration>
+                    <!--指定包的入口类-->
+                    <archive>
+                        <manifest>
+                             <mainClass>com.imooc.maven.PinyinTestor</mainClass>
+                        </manifest>
+                    </archive>
+                    <!-- 打包使用的额外参数-->
+                    <descriptorRefs>
+                        <!-- all in one, 在打包时会将所有引用的jar合并到输出的jar文件中-->
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+```
+
+![java_44](E:\self\记录\myNotes\images\java_44.png)
+
+**打包后可以运行`jar -jar *.jar`**运行jar包
+
+**最佳实践swm项目**
+
+```
+
+    <!--打包输出的包格式jar|war包:war包-->
+    <packaging>war</packaging>
+     
+    <!--构建-->
+    <build>
+        <!--打包输出的包名-->
+        <finalName>swm</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://local.jd.com</url>
+                    <port>8073</port>
+                    <path>/</path>
+                    <contextReloadable>true</contextReloadable>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+```
+
+## 新建web工程
+
+准备工作：新建 tomcat7
+
+![](E:\self\记录\myNotes\images\java_49.png)
