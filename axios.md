@@ -163,3 +163,95 @@ request({
   });
 ```
 
+# 导出excel
+
+## get + Query Parameters String =》 文件流
+
+**a标签link或者当成link**
+
+****
+
+```
+let params = {id: 123};
+window.open(`${winDomain}/jdmanager/fusion/approve/downloadList?${qs.stringify(params)}`);
+```
+
+![](E:\self\记录\myNotes\images\downloadexcel_1.png)
+
+## 
+
+## post + x-www-form-urlencoded(请求实体) =》文件流
+
+**表单提交方式**
+
+```
+downLoadExcel({
+        url: `${rtaDomain}/rta/rtaAdvertSeat/downloadList`,
+        method: 'post',
+        data: {id: 123}
+});
+
+export function downLoadExcel(options, selfOpen = false){
+  var config = Object.assign({ method: 'post' }, options);
+
+  var iframeDom = document.createElement('iframe');
+  iframeDom.id = 'down-file-iframe';
+
+  var formDom = document.createElement('form');
+  formDom.target = 'down-file-iframe';
+  formDom.method = config.method;
+  formDom.action = config.url;
+
+  for (var key in config.data) {
+    var inputDom = document.createElement('input');
+    inputDom.type = 'hidden';
+    inputDom.name = key;
+    inputDom.value = config.data[key];
+    inputDom.type = 'hidden';
+    formDom.appendChild(inputDom);
+  }
+  debugger
+  iframeDom.appendChild(formDom);
+
+  document.body.appendChild(iframeDom);
+
+  formDom.submit();
+
+  iframeDom.remove();
+}
+```
+
+![](E:\self\记录\myNotes\images\downloadexcel_2.png)
+
+## post + application/json(请求实体) =》京东云url
+
+```
+        const result = await this.props.dispatch({
+            type: 'overview/downloadOneDayTableDetail',
+            params
+        })
+        if (result && result.code == 200) {
+            window.open(result.data);
+        } else {
+            message.error((result && result.retMessage) || 'T+1下载接口异常！')
+        }
+```
+
+```
+        *downloadOneDayTableDetail({ params }, { call }) {
+            const response = yield call(downloadOneDayTableDetail, params);
+            return response;
+        },
+```
+
+```
+// T+1列表明细下载接口
+export async function downloadOneDayTableDetail(params) {
+    return request('/api/history/downloadHistoryList', {
+        method: 'post',
+        data: params
+    });
+}
+```
+
+![](E:\self\记录\myNotes\images\downloadexcel_3.png)

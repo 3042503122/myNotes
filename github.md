@@ -119,3 +119,13 @@ git remote add origin https://coding.jd.com/mahonglu/cshop4B.git
 git add . 
 git commit -m "Initial commit" 
 git push -u origin master 
+
+# FAQ
+
+# fatal: unable to access 'https://github.com/.../.git': Could not resolve host: github.com
+
+```
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+

@@ -12,12 +12,17 @@
 
 \-
 
-- `npm install taco@latest --save` === `yarn add taco`
+- `npm install taco@latest --save` === `yarn add taco` 安装最新版本
+- `npm install taco@版本号 --save` === `yarn add taco` 安装指定版本的 
+- `npm update taco@latest --save` === `yarn add taco` 更新最新版本
+- `npm update taco@版本号 --save` === `yarn add taco` 更新指定版本的 
 - `npm install taco --global` === `yarn global add taco` —— 一如既往，请谨慎使用 global 标记。
 
 > 注意：使用yarn或yarn install安装全部依赖时是根据package.json里的”dependencies”字段来决定的
 
-\-
+
+
+
 
 - `npm init` === `yarn init`
 - `npm init --yes/-y` === `yarn init --yes/-y`

@@ -200,6 +200,134 @@ https://code.visualstudio.com/docs/java/java-tutorial
 | 【alt + enter】*                | 智能提示                         |
 |                                 |                                  |
 
+## 数据类型
+
+- 数据库
+
+  ![](E:\self\记录\myNotes\images\mysql_9.png)
+
+- java
+
+  ![](E:\self\记录\myNotes\images\java_50.png)
+
+  
+
+- 类型转换
+
+  强制类型转换：下图箭头的反方向都是强制类型转换，格式(数据类型)数值，例如
+
+  ```
+  double d = 123.4;
+  float f = (float)d;
+  ```
+
+  ![](E:\self\记录\myNotes\images\java_51.png)
+
+### 数组
+
+语法格式：声明+初始化
+
+1)  数据类型[] 数组名 = new 数据类型[数组长度]；// int[] arr;
+
+```
+// 声明 + 赋值
+int[] arr = new int[10];
+// 声明 + 初始化
+int[] arr = {1,3,5}
+//数组元素引用
+arr[0]
+// 数组长度
+arr.length
+```
+
+2) 数据类型 数组名[] = new 数据类型[数组长度]；//int arr[];
+
+```
+// 声明 + 赋值
+int arr[] = new int[10]
+```
+
+- 报错：数组下表越界“ArrayIndexOutOfBoundsException”
+
+## 变量VS常量
+
+```
+// 变量
+int i = 0;
+
+// 常量
+final int PI = 3.14;
+final double MIN_VALUE = 0;
+```
+
+## 运算符
+
+- 算数运算符：加+ 减-  乘*  除/  取余% 自增1++  自减--
+
+  ```
+  System.out.print(13/5);// 结果：2，分子分母都是整型时，结果为整除后的结果
+  System.out.print(13.0/5);// 结果：2.6
+  
+  System.out.print(13%5); // 结果：3
+  System.out.print(13.5%5); // 结果：3.5
+  ```
+
+- 赋值运算符
+
+  复合赋值运算符
+
+  ```
+  int x = 15;
+  // +=
+  x+=5; // x = x+5 
+  
+  // -=
+  x-= 5 // x = x-5
+  
+  // *=
+  x*=5 // x = x*5
+  
+  // /5
+  x/=5 // x = x/5
+  
+  // %
+  x%=5 // x = x%5
+  ```
+
+  
+
+- 关系运算符
+
+- 逻辑运算符
+
+- 条件运算符
+
+- 位运算符
+
+## if for
+
+```
+if() {
+
+} else if () {
+
+} else {
+
+}
+```
+
+```
+for(int n=1; n<5; n++){
+// 输出语句
+}
+
+数组可以使用增强型for循环
+int[] arr = {1,3,5,7,9}
+for(int item:arr) {
+// 输出语句
+}
+```
+
 
 
 ## 新建 class
