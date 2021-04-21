@@ -144,6 +144,14 @@ https://code.visualstudio.com/docs/java/java-tutorial
 
 ### 运行调试
 
+| 快捷键 | 作用                                           |
+| ------ | ---------------------------------------------- |
+| F6     | 单步调试                                       |
+| F5     | 调到方法内部执行                               |
+| F7     | 从方法内部返回调用处（F5跳到方法内部想跳出去） |
+
+
+
 ### 打包
 
 -  声明打包
@@ -225,29 +233,132 @@ https://code.visualstudio.com/docs/java/java-tutorial
 
 ### 数组
 
-语法格式：声明+初始化
-
-1)  数据类型[] 数组名 = new 数据类型[数组长度]；// int[] arr;
+一维数组
 
 ```
 // 声明 + 赋值
+// 第1种：数据类型[] 数组名 = new 数据类型[数组长度]；
 int[] arr = new int[10];
+// 第2种:数据类型 数组名[] = new 数据类型[数组长度]
+int arr[] = new int[10]
 // 声明 + 初始化
 int[] arr = {1,3,5}
 //数组元素引用
 arr[0]
 // 数组长度
 arr.length
+
+// 数组
+
+// 指定位置k插入 10
+public void insertAtArray(int[] a, int item, int k){
+  for(int i = a.length - 1; i>k;i--){
+    a[i] = a[i-1]
+  }
+  a[k] = n;
+}
+
+// 输出数组能被3整除的
+public void div3(int a) {
+  String str = "";
+  int count = 0;
+  for(int n:a){
+    if(n%3===0){
+      str = str+n+"  ";
+      count++
+    }
+  }
+  if(count===0){
+    System.out.println("数组中没有能被3整除的元素")
+  } else {
+    System.out.println("数组中能被3整除的元素："+str)
+  }
+}
 ```
 
-2) 数据类型 数组名[] = new 数据类型[数组长度]；//int arr[];
+二维数组
 
 ```
-// 声明 + 赋值
-int arr[] = new int[10]
+//  声明 + 赋值
+// 第1种
+int[][] arr = new int[3][5] 
+// 第2种
+int arr[][] = new int[3][5]
+// 第3种
+int[] arr[] = new int[3][5]
+
 ```
 
 - 报错：数组下表越界“ArrayIndexOutOfBoundsException”
+
+### 方法
+
+方法声明
+
+```
+// 语法格式：
+// 访问修饰符 返回类型 方法名(参数列表) {
+//    方法体
+// }
+// 修饰符 public static
+public static void main (String[] args) {
+  System.out.printIn("hello, imooc")
+}
+```
+
+根据方法是否带参数、是否返回值，可分为4类：
+
+1. 无参无返回值方法
+
+   ```
+   public void printStar() {
+     System.out.printIn("************");
+   }
+   ```
+
+2. 无参带返回值方法
+
+   ```
+   public string printStar() {
+     return "hello world"
+   }
+   ```
+
+3. 带参无返回值方法
+
+   ```
+   public void max(float a, float b) {
+      System.out.printIn("************");
+   }
+   ```
+
+4. 带参带返回值方法
+
+   ```
+   public float max(float a, float b) {
+      return a + b;
+   }
+   ```
+
+   可变参数：可以将数组传递给可变参数列表
+
+   ```
+   public void search(int n, int ...a) {
+     boolean flag = false;
+     for(int a1:a) {
+       if(a1===n){
+         flag = true;
+         break;
+       }
+     }
+     return false;
+   }
+   
+   int[] a = [1,2,3];
+   search(3, a);
+   ```
+
+   
 
 ## 变量VS常量
 
@@ -353,25 +464,120 @@ for(int item:arr) {
 
 ### 概念
 
-创建类语法
+#### 语法格式
 
 ```
 public class 类名 {
   // 类的内容
-  // 属性
+  // 构造方法
+  public 类名() {
+  
+  }
+  
+  // 属性: [访问修饰符] 数据类型 属性名;
   private String owner = "姓名"
-  // 方法
+  
+  // 方法: [访问修饰符] 返回类型 方法名(参数){}
   private String getOwner() {
     return this.owner;
+  }
+  private void sayOwner() {
+    // 同一个类中的方法间调用可以写this、也可以不写this
+    this.sayHi();
+    sayHi();
+    
+    system.out.println("我的姓名：" + this.owner)
+  }
+  private void sayHi() {
+    System.out.println("hi")
   }
 }
 ```
 
 ```
-创建类的实例对象
+// 创建类的实例对象
 类名 对象名 = new 类名();
 Dog lucky = new Dog();
+// 使用对象属性
+lucky.属性;
+// 使用对象方法
+lucky.方法();
 ```
+
+#### 构造方法
+
+
+
+#### 属性：默认有初始值
+
+与定义变量不同（声明但没赋值就使用时，报错），属性是有初始值的
+
+| 基本类型 | 默认值 |
+| -------- | ------ |
+|          |        |
+|          |        |
+|          |        |
+|          |        |
+|          |        |
+|          |        |
+| 引用类型 | null   |
+
+
+
+#### 访问修饰符
+
+修饰类的属性和方法
+
+| 访问修饰符 | 名称           | 说明                                                         | 本类 | 同一个包的类 | 继承类 | 其他类 |
+| ---------- | -------------- | ------------------------------------------------------------ | ---- | ------------ | ------ | ------ |
+| private    | 私有           | 只能在类的内部访问(例如：人的class,自己的信用卡密码 不能对外暴露)，但**private属性可以通过Getter和Setter对成员变量进行封装实现外边进行访问** | √    |              |        |        |
+| (default)  | 默认(使用很少) | 相同包的其他类都可以使用                                     | √    | √            |        |        |
+| protected  | 继承           | 只有继承的子类能访问到                                       | √    | √            | √      |        |
+| public     | 公用           | 在任何地方都可以访问(例如：人的class,自己的姓名 需要对外暴露) | √    | √            | √      | √      |
+
+![](E:\self\记录\myNotes\images\java_24.png)
+
+##### private属性通过 Getter和Setter对外暴露
+
+```
+package www.mahonglu.project.demo3;
+
+public class GetterAndSetter {
+    public String name;
+    private String mobilePhone;
+
+    // getter方法：用于读取private成员变量的内容
+    // getter书写格式：public成员变量类型 get成员变量名(), PS:首字母大写
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    // setter方法：用于设置private成员变量的内容
+    // setter书写个数：public void set成员变量名（新的数据参数）
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+}
+```
+
+```
+package www.mahonglu.project.demo3;
+
+public class Instance {
+    public static void main(String[] args) {
+        GetterAndSetter demo = new GetterAndSetter();
+        demo.name = "张三";
+        demo.setMobilePhone("13112341234");
+        System.out.println(demo.name);
+        System.out.println(demo.getMobilePhone());
+    }
+}
+
+```
+
+快捷方法
+
+<img src="E:\self\记录\myNotes\images\java_25.png" style="zoom:80%;" />
 
 
 
@@ -456,61 +662,6 @@ Dog lucky = new Dog();
   // Dog lucky = new Dog();
   Dog鼠标自动有
   ```
-
-## 修饰符
-
-修饰类的属性和方法
-
-| 访问修饰符 | 名称           | 说明                                                         | 本类 | 同一个包的类 | 继承类 | 其他类 |
-| ---------- | -------------- | ------------------------------------------------------------ | ---- | ------------ | ------ | ------ |
-| private    | 私有           | 只能在类的内部访问(例如：人的class,自己的信用卡密码 不能对外暴露)，但**private属性可以通过Getter和Setter对成员变量进行封装实现外边进行访问** | √    |              |        |        |
-| (default)  | 默认(使用很少) | 相同包的其他类都可以使用                                     | √    | √            |        |        |
-| protected  | 继承           | 只有继承的子类能访问到                                       | √    | √            | √      |        |
-| public     | 公用           | 在任何地方都可以访问(例如：人的class,自己的姓名 需要对外暴露) | √    | √            | √      | √      |
-
-![](E:\self\记录\myNotes\images\java_24.png)
-
-### private属性通过 Getter和Setter对外暴露
-
-```
-package www.mahonglu.project.demo3;
-
-public class GetterAndSetter {
-    public String name;
-    private String mobilePhone;
-
-    // getter方法：用于读取private成员变量的内容
-    // getter书写格式：public成员变量类型 get成员变量名(), PS:首字母大写
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    // setter方法：用于设置private成员变量的内容
-    // setter书写个数：public void set成员变量名（新的数据参数）
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-}
-```
-
-```
-package www.mahonglu.project.demo3;
-
-public class Instance {
-    public static void main(String[] args) {
-        GetterAndSetter demo = new GetterAndSetter();
-        demo.name = "张三";
-        demo.setMobilePhone("13112341234");
-        System.out.println(demo.name);
-        System.out.println(demo.getMobilePhone());
-    }
-}
-
-```
-
-快捷方法
-
-<img src="E:\self\记录\myNotes\images\java_25.png" style="zoom:80%;" />
 
 ## 数据类型
 

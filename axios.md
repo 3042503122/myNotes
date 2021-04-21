@@ -163,9 +163,9 @@ request({
   });
 ```
 
-# 导出excel
+## 导出excel
 
-## get + Query Parameters String =》 文件流
+### get + Query Parameters String =》 文件流
 
 **a标签link或者当成link**
 
@@ -180,7 +180,7 @@ window.open(`${winDomain}/jdmanager/fusion/approve/downloadList?${qs.stringify(p
 
 ## 
 
-## post + x-www-form-urlencoded(请求实体) =》文件流
+### post + x-www-form-urlencoded(请求实体) =》文件流
 
 **表单提交方式**
 
@@ -223,7 +223,7 @@ export function downLoadExcel(options, selfOpen = false){
 
 ![](E:\self\记录\myNotes\images\downloadexcel_2.png)
 
-## post + application/json(请求实体) =》京东云url
+### post + application/json(请求实体) =》京东云url
 
 ```
         const result = await this.props.dispatch({
