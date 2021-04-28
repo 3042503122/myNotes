@@ -187,9 +187,13 @@ this.$route.query
 
 ```
 import { history } from 'umi';
-// 跳转页面-命令式
+import { router } from 'umi';
+// 跳转页面-命令式 1）router.config.js里边的path 2）相对路径
 const id = 123;
+// 方1：
 history.push(`./edit/${id}`);
+// 方2: 
+router.push(`/management/session/dataDetail`)
 // 获取路由参数
 this.props.match.params
 ```
@@ -202,7 +206,9 @@ this.props.match.params
 
 ### props
 
-### 自定义事件
+### 自定义事件(父子组件相互调用方法)
+
+#### 子组件调用父组件
 
 ```
 //  父组件
@@ -264,7 +270,9 @@ export default {
 
 ### props
 
-### 自定义事件
+### 自定义事件(父子组件相互调用方法)
+
+#### 子组件调用父组件
 
 ```
 //  父组件
@@ -273,6 +281,80 @@ export default {
 
 ```
 //  子组件
+```
+
+ hook
+
+```
+//父组件
+let Father=()=>{
+    let getInfo=()=>{
+        
+    }
+    return ()=>{
+        <div>
+            <Children 
+                getInfo={getInfo}
+            />
+        </div>
+    }
+}
+//子组件
+let Children=(param)=>{
+    return ()=>{
+        <div>
+            <span onClick={param.getInfo}>调用父组件函数</span>
+        </div>
+    }
+}
+```
+
+
+
+#### 父组件调用子组件
+
+```
+// 父组件
+
+// 子组件
+(typeof getValue === 'function') && getValue(submit);
+
+```
+
+hook
+
+```
+//父组件
+//需要引入useRef
+import {useRef} from 'react'
+let Father=()=>{
+    const childRef=useRef();
+    let onClick=()=>{
+        childRef.current.getInfo();
+    }
+    return ()=>{
+        <div>
+            <Children 
+                ref={childRef}
+            />
+            <span onClick={onClick}>调用子组件函数</span>
+        </div>
+    }
+}
+//子组件 
+//需要引入useImperativeHandle,forwardRef
+import {useImperativeHandle,forwardRef} from 'react'
+let Children=(ref)=>{
+    useImperativeHandle(ref, () => ({
+        getInfo:()=>{
+            //需要处理的数据
+        }
+    }))
+    return ()=>{
+        <div></div>
+    }
+}
+Children = forwardRef(Children);
 ```
 
 
