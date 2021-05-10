@@ -69,7 +69,7 @@ npm run start
 
 背景：package.json => scripts
 
-栗子👁️‍🗨️：区区购
+栗子👁️‍🗨️：区区购（前端和后端部署到）
 
 <img src="E:\self\记录\myNotes\images\umi_4.png"  />
 
@@ -84,6 +84,11 @@ npm run start
 ### 线上彩蛋方便定位问题
 
 ![](E:\self\记录\myNotes\images\umi_5.png)
+
+```
+UPDATE_TIME: moment().format('YYYY-MM-DD HH:mm:ss')
+<h1><Popover placement="bottom" content={<div style={{fontSize: 12}}>最后更新：{UPDATE_TIME}</div>}>{title}</Popover></h1>
+```
 
 
 
