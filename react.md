@@ -795,7 +795,6 @@ render() {
 4. 如果你想改变组件里的数据，不能直接去改；要通过setState去改；
 
    this.setState({inputValue: e.target.value})
-   
 
 
 

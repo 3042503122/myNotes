@@ -1,5 +1,11 @@
 # 参考
 
+- [官网api](http://nginx.org/en/docs/)
+
+  官网使用指南
+
+  ![](E:\self\记录\myNotes\images\nginx_3.png)
+
 # 其他
 
 [在线进行配置，选择你的场景，填写好参数，系统就会自动生成配置文件](https://www.digitalocean.com/community/tools/nginx)
@@ -76,10 +82,6 @@ http://nginx.org/
 
 #  nginx基本配置语法（nginx.conf）
 
-## 官网
-
-[官网api](http://nginx.org/en/docs/)
-
 ## 实践注意
 
 修改nginx.conf要重新启动
@@ -108,9 +110,13 @@ E:/nginx-1.20.0/nginx.exe -s reload -c E:/nginx-1.20.0/conf/nginx.conf
 | --with-http_random_index_module | 目录中选择一个随机主页                                       |          |
 | --with-http_sub_module          | nginx服务端在给客户端reponse http内容的时候，用于对response http内容替换 |          |
 
-## http_log_module
+### location
 
-- 用途：nginx服务器日志相关指令主要有两条：一条是log_format，用来设置日志格式；另外一条是access_log，用来指定日志文件的存放路径、格式和缓存大小
+[location [=|~|~*|^~|@] pattern { ... }](https://juejin.cn/post/6844903849166110733)
+
+### http_log_module
+
+- 用途：nginx服务器日志相关指令主要有两条：一条是log_format，用来设置日志格式；另外一条是access_log，用来指定日志文件的存放路径、格式和缓存大小	
 
 - 格式：
 
@@ -485,11 +491,218 @@ Context: location;
 
 - 实践
 
+  准备工作：html/app/images/1.png
+
+  关闭压缩：浏览器输入`localhost/1.png`看到是280K
+
+  ```
+  location ~ .*\.(jpg|gif|png)$ {
+              #gzip on;
+              #gzip_http_version 1.1;
+              #gzip_comp_level 2;
+              #gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+              root html/app/images;
+          }
+  ```
+
+  打开压缩：浏览器输入`localhost/1.png`看到是50k
+
+  ```
+          location ~ .*\.(jpg|gif|png)$ {
+              gzip on;
+              gzip_http_version 1.1;
+              gzip_comp_level 2;
+              gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+              root html/app/images;
+          }
+  ```
+
+  压缩配置-预读gzip功能：浏览器`localhost/download/pending.json`
+
+  准备工作：html/app cmd下：`gzip pending.json` 就有html/app/pending.json.gz
+
+  ```
+          location ~ ^/download {
+              gzip_static on;
+              tcp_nopush on;
+              root html/app;
+          }
+  ```
+
+  
+
+### 配置语法 - 浏览器缓存
+
+- 定义
+
+  http协议定义的缓存机制（如 Expires; Catch-control等），有了浏览器的缓存 客户端就不会实时每次都请求服务器，给服务端造成资源消耗；客户端从本地中读 更快 响应时间更短
+
+- 格式
+
+  ```
+  Syntax:	expires [modified] time;
+  expires epoch | max | off;
+  Default:	
+  expires off;
+  Context:	http, server, location, if in location
+  ```
+
+- 实践
+
+  ```
+  location ~ .*\.(htm|html)$ {
+      expires 24h;
+      root html/app;
+  }
+  ```
+
+  ![](E:\self\记录\myNotes\images\nginx_4.png)
 
 
 
+### 配置语法 - 跨域访问
 
+- 定义：
 
+  why浏览器禁止跨域访问？不安全，容易出现csrf攻击
+
+  what csrf?（英语：Cross-site request forgery）跨站请求伪造
+
+  有时候需要让浏览器允许跨域访问
+
+- 格式 ：指令
+
+  ```
+  Syntax:	add_header name value [always];
+  Default:	—
+  Context:	http, server, location, if in location
+  ```
+
+- 实践
+
+  ```
+  location ~ .*\.(htm|html)$ {
+      # 有的配置成*
+      add_header Access-Control-Allow-Origin http://wwww.jesonc.com;
+      add_header Access-Control-Allow-Methods GET,POST,DELETE,OPTIONS;
+      root html/app;
+  }
+  ```
+
+### 配置语法 - 防盗链
+
+- [定义](https://www.jianshu.com/p/0a1338db6cab)
+
+  index.html在被解析时，浏览器会识别页面源码中的img，script等标签，标签内部一般会有src属性，src属性一般是一个绝对的URL地址或者相对本域的地址。浏览器会识别各种情况，并最终得到该资源的唯一地址，加载该资源。
+
+  准确的说，只有某些时候，这种跨站访问资源，才被称为盗链。假设B站点作为一个商业网站，有很多自主版权的图片，自身展示用于商业目的。而A站点，希望在自己的网站上面也展示这些图片，直接使用：
+
+  ```xml
+  <img src="http://b.com/photo.jpg"/>
+  ```
+
+  这样，大量的客户端在访问A站点时，实际上消耗了B站点的流量，而A站点却从中达成商业目的。从而不劳而获。这样的A站点着实令B站点不快的。如何禁止此类问题呢？
+
+  防盗链目的：防止资源被盗用
+
+- 格式 ：指令
+
+  ```
+  Syntax:	valid_referers none | blocked | server_names | string ...;
+  Default:	—
+  Context:	server, location
+  ```
+
+  获取相关值可以使用nginx变量，`$http_referer`
+
+- 实践
+
+  ```
+  location ~ .*\.(jpg|gif|png)$ {
+      gzip on;
+      gzip_http_version 1.1;
+      gzip_comp_level 2;
+      gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+  
+      # valid_referers 表示允许哪些信息被访问 
+      # none 表示允许没有信息的过来
+      # blocked 表示refer信息不是标准的http:// https://过来的 是允许一下非协议信息的
+      # jd.com只允许域名是它的过来 这是一个正则~/jd\./
+      valid_referers none blocked ~/jd\./;
+      if($invalid_referer) {
+        return 403;
+      }
+  
+      root html/app/images;
+  }
+  ```
+
+### 配置语法 - 代理
+
+- 定义：
+
+  代理：代为办理（代理理财、代理收货等等）
+
+  ![](E:\self\记录\myNotes\images\nginx_5.png)
+
+  <img src="E:\self\记录\myNotes\images\nginx_6.png" style="zoom:80%;" />
+
+  正向代理、反向代理区别？代理对象不同，正向代理代理的对象是客户端，反向代理的是服务器
+
+- 格式 ：指令
+
+  ```
+  Syntax:	proxy_pass URL;
+  Default:	—
+  Context:	location, if in location, limit_except
+  ```
+
+  url: 1）http`http://localhost:800/uri` 2) https`https://192.168.1.1:8000/uri/` 3)socket `http：unix:/tmp/backend.socket:/uri`
+
+- 实践
+
+  ```
+          # proxy的常用配置
+          location / {
+            proxy_pass http://127.0.0.1:8080;
+            proxy_redirect default;
+  
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+  
+            proxy connect_timeout 30;
+            proxy_send_timeout 60;
+            proxy read_timeout 60;
+  
+            proxy_buffer_size 32k;
+            proxy_buffering on;
+            proxy_buffers 4 128k;
+            proxy_busy_buffers_size 256k;
+            proxy_max_temp_fill_size 256k;
+          }
+  ```
+
+### 配置语法 - 负载均衡
+
+- 定义
+
+  <img src="E:\self\记录\myNotes\images\nginx_7.png" style="zoom:80%;" />
+
+- 格式
+
+  ```
+  Syntax:	server address [parameters];
+  Default:	—
+  Context:	upstream
+  ```
+
+- 实践
+
+  ```
+  
+  ```
+
+  
 
 
 

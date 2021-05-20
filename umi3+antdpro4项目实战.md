@@ -53,6 +53,25 @@ npm run start
 
 ## 个性化项目
 
+### 路由router.config.js
+
+#### 普通路由
+
+config.js
+
+```
+import routes from './router.config';
+export default {
+...
+routes,
+...
+}
+```
+
+#### 权限路由
+
+### 登录
+
 ### 主题
 
 [ 官网 ](https://v2-pro.ant.design/index-cn)
@@ -65,7 +84,7 @@ npm run start
 
 
 
-### 打包部署
+### 部署
 
 背景：package.json => scripts
 
@@ -91,23 +110,6 @@ UPDATE_TIME: moment().format('YYYY-MM-DD HH:mm:ss')
 ```
 
 
-
-### router.config.js
-
-config.js
-
-```
-import routes from './router.config';
-export default {
-...
-routes,
-...
-}
-```
-
-```
-
-```
 
 # 🐱添加业务界面
 

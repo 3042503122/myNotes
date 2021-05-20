@@ -240,4 +240,6 @@ git config --global credential.helper store
   git push
   ```
 
-  
+- 场景：**如果push上去了，已经覆盖了线上的代码，就需要先用git revert + 版本号 或者 HEAD(回到上一个push的版本)，将线上的代码回滚**
+  1. vscode git graph扩展工具 -》右键 reset（本地重置）
+  2. 线上重置`git push -u origin master -f`
