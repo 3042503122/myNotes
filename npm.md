@@ -1,3 +1,77 @@
+# npx
+
+## 参考资料
+
+[你好，npx](https://juejin.cn/post/6929742176268058631#heading-0)
+
+## what
+
+如果你把NPM升级到最新版本，`npm@5.2.0` ，可能会发现，它会安装一个新的包`npx` 。
+
+如果不能用，手动安装
+
+```
+npm install -g npx
+复制代码
+```
+
+## why
+
+### 执行一次性命令，避免全局安装
+
+![npx1.gif](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8c1ebad03d2c415e80e7231c727846a9~tplv-k3u1fbpfcp-zoom-1.image)
+
+> `$ npx create-react-app my-app` 安装一个临时的 create-react-app 并且调用它（即不会全局安装create-react-app, create-react-app临时安装的是最新的），不会污染全局安装（即不会全局安装create-react-app）
+
+场景
+
+比如，尝试一些CLI工具，但只需安装一个global就可以运行一次，这很烦人？
+
+步骤
+
+- 当不在$PATH中时调用npx将自动从npm注册表安装一个具有该名称的包，并调用它。
+- npx 将`create-react-app`下载到一个临时目录，使用以后再删除。
+- 完成后，安装的软件包将会删除，而不会出现在globals中，不必担心全局污染。
+
+优点
+
+- 避免全局安装模块，占用本地资源；
+- 不用担心模块版本更新滞后的问题；
+
+适用
+
+这个特性非常适合生成器CLI这类需求，比如· `yeoman` 或 `create-react-app` 等。
+
+类似的软件包： `happy-birthday` ， `benny-hill` ， `workin-hard`，`cowsay`，`yo` ， `create-react-app` ， `npm-check` 。更多的可以查看[完整的npx仓库](https://github.com/junosuarez/awesome-npx)
+
+**实践1： 临时安装prettier并执行命令格式化代码**
+
+```
+ // 临时安装prettier
+ // 执行命令 prettier --write .
+ npx prettier --write .
+```
+
+**实践2： 临时安装 脚手架create-react-app**
+
+原理: npx 运行的时候, 会到 node_modules/.bin 路径和环境变量 $PATH 里,检测命令是否存在.
+
+- 强制使用本地模块，不下载远程模块， `--no-install`
+
+  > 如果本地不存在该模块，就会报错。
+
+- 忽略本地的同名模块，强制安装使用远程模块， `--ignore-existing`
+
+  比如，本地已经全局安装了create-react-app，但还是想使用远程模块，就用这个参数。
+
+```
+ // 临时安装prettier
+ // 执行命令 prettier --write .
+ npx prettier --write .
+```
+
+
+
 #  yarn
 
 [api](https://yarnpkg.com/en/docs/cli/create)

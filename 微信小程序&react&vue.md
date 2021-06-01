@@ -367,6 +367,10 @@ Children = forwardRef(Children);
 
 ## vue
 
+<img src="https://vuex.vuejs.org/flow.png" alt="img" style="zoom:33%;" />
+
+![vuex](https://vuex.vuejs.org/vuex.png)
+
 ### api
 
 ```
@@ -385,10 +389,42 @@ export const getShowWorkTask = (params) => {
 
 #### actions
 
+```
+// 统一管理actions， mutations 中的 key
+export const ADD_NUM = 'ADD_NUM';
+
+export const GET_SCORE_HOME = 'GET_SCORE_HOME';
+
+
+
+export const GET_EXAM_SCORE = 'GET_EXAM_SCORE';
+
+
+
+export const GET_SHOW_USER_WORK_LIST = 'GET_SHOW_USER_WORK_LIST';
+export const GET_SHOW_USER_FINISHED_LIST = 'GET_SHOW_USER_FINISHED_LIST';
+export const GET_VERIFY_LIST = 'GET_VERIFY_LIST';
+
+export const INIT_DETAIL_DATA = 'INIT_DETAIL_DATA';
+export const GET_SHOW_WORK_TASK = 'GET_SHOW_WORK_TASK';
+export const GET_USERINFO = 'GET_USERINFO';
+export const SEARCH_USERS_LIST = 'SEARCH_USERS_LIST';
+export const APPROVAL_APPLICATION = 'APPROVAL_APPLICATION';
+export const SET_DATA_DETAIL = 'SET_DATA_DETAIL';
+export const EMPTY_USER_SEARCH_LIST = 'EMPTY_USER_SEARCH_LIST';
+export const COMMENT_MATERIAL = 'COMMENT_MATERIAL';
+export const SET_TRANSFER_PROCESS = 'SET_TRANSFER_PROCESS';
+
+```
+
+
+
 #### modules
 
 ```
 // verify.js
+import * as ActionTypes from '../actions/verify';
+
 import {
   getListData
 } from '../../api/verify';
@@ -554,7 +590,7 @@ export default {
 }
 ```
 
-## pages
+### pages
 
 ```
 // session.js
@@ -576,5 +612,70 @@ export default class SessionList extends PureComponent {
      // this.props.list
   }
 }
+```
+
+## redux
+
+<img src="https://redux.js.org/assets/images/one-way-data-flow-04fe46332c1ccb3497ecb04b94e55b97.png" alt="单向数据流" style="zoom:33%;" />
+
+<img src="https://redux.js.org/assets/images/ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26.gif" alt="Redux数据流程图" style="zoom: 33%;" />
+
+### api
+
+```
+// verify.js
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
+export const getShowWorkTask = (params) => {
+  return axios.get(`${verifyApi}/approve/apply/detail`, {
+    params
+  })
+}
+```
+
+### stores
+
+#### actions
+
+```
+
+```
+
+#### reducers
+
+```
+
+```
+
+#### pages
+
+```
+class Index extends Component {
+	componentDidMount() {
+	   this.props.getAppData(app, moment().format("YYYY-MM-DD HH:mm:ss"));
+	}
+}
+const mapStateToProps = (state) => {
+	return {
+		totalNum: state.home.totalNum,
+		mainData: state.home.mainData,
+		getDataTime: state.home.getDataTime,
+		getTotalNumLoading: state.home.getTotalNumLoading,
+		oldTotalNum: state.home.oldTotalNum
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		update,
+		saveSystemInfo,
+		getTotalData,
+		getAppData,
+		getTotalNum,
+	}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
 ```
 

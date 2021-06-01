@@ -407,6 +407,19 @@ module.exports = {
 
 教webpack怎么去查询文件
 
+### alias
+
+```
+// 使用时 import Element from "@/"的前提
+// webpack.config.js
+resolve: {
+  alias: {
+     '@': path.resolve(__dirname, '../src')
+  }
+}
+
+```
+
 
 
 ## devtool
@@ -640,6 +653,76 @@ webpack -w --progress --display-reasons --color
 | overlay            |         |      | 遮罩，webpack-dev-server提供的错误提示，浏览器中就能提示打包报错 |
 
 https://www.cnblogs.com/yupinghua/p/6308515.html
+
+
+
+# 项目中常用配置
+
+## src别名@
+
+```
+// 使用时 import Element from "@/"的前提
+// webpack.config.js
+module.exports = {
+
+resolve: {
+  alias: {
+     '@': path.resolve(__dirname, '../src')
+  }
+}
+
+}
+
+```
+
+## 全局常量
+
+[官网](https://webpack.js.org/plugins/define-plugin/)
+
+将`DefinePlugin`允许您创建可在配置全局常量**的编译**时间
+
+```
+// webpack.config.js
+module.exports = {
+  plugins: [
+            new webpack.DefinePlugin({
+                SWMDIRECTORYNAME: JSON.stringify(swmDirectoryName),
+                ENVIRONMENT: JSON.stringify(argv.mode),
+                MODE: JSON.stringify({
+                  'production': 'prod',// 线上
+                  'development': 'dev', // 本地
+                  'none': 'dev', // 预发
+                }[argv.mode])
+            })
+        ],
+  }
+```
+
+## 每次build先删除dist！！！
+
+```
+module.exports = {
+
+plugins: [
+            new CleanWebpackPlugin('dist')
+]
+
+}
+```
+
+## publicPath
+
+打包后index.html静态资源js、 css、图片使用绝对路径引入
+
+```
+module.exports = {
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: 'js/[name].[hash].js',
+        publicPath = `https://storage.360buyimg.com/swm-stable/${swmDirectoryName}/`
+    }
+}
+```
 
 
 

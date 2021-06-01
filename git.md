@@ -52,6 +52,12 @@ git reset HEAD^
 
 
 
+# .gitignore
+
+## 官网
+
+https://git-scm.com/docs/gitignore
+
 # 小技巧
 
 ## git查看项目地址
