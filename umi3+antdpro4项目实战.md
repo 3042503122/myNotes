@@ -53,38 +53,19 @@ npm run start
 
 ## 个性化项目
 
-### 路由router.config.js
+### 精简项目
 
-#### 普通路由
+无
 
-config.js
+### 区分环境
 
-```
-import routes from './router.config';
-export default {
-...
-routes,
-...
-}
-```
+- publicPath
 
-#### 权限路由
+- 定义全局变量 - 接口地址
 
-### 登录
+- 定义全局变量 - 最近更新时间
 
-### 主题
-
-[ 官网 ](https://v2-pro.ant.design/index-cn)
-
-![](E:\self\记录\myNotes\rn\react_4.png)
-
-![](E:\self\记录\myNotes\rn\react_5.png)
-
-<img src="E:\self\记录\myNotes\rn\react_6.png" style="zoom: 67%;" />
-
-
-
-### 部署
+- 定义全局变量 - 点击header-logo跳转首页
 
 背景：package.json => scripts
 
@@ -111,7 +92,172 @@ UPDATE_TIME: moment().format('YYYY-MM-DD HH:mm:ss')
 
 
 
-# 🐱添加业务界面
+### 路由router.config.js
+
+#### 普通路由
+
+config.js
+
+```
+import routes from './router.config';
+export default {
+...
+routes,
+...
+}
+```
+
+```
+// router.config.js
+export default [
+  {
+    path: '/',
+    component: '../layouts/BasicLayout',
+    routes: [
+      // 跳转外边链接
+      {
+        path: url + '/community/shop/manage',
+        name: 'shopManager', //店长管理
+        icon: 'team',
+      },
+       // 一级页面，无嵌套
+      {
+        path: '/v2/shop_manage',
+        name: 'shopManage', //店铺组管理
+        component: './ShopManage',
+        icon: 'bank',
+      },
+      
+      // 有二级菜单
+      {
+        path: '/v2/report',
+        name: 'report',
+        icon: 'bar-chart',
+        routes: [
+          {
+            path: '/v2/report/daily_sales_summary',
+            name: 'dailySalesSummary', //每日销售汇总
+            component: './Report/DailySummary',
+            icon: 'file-text',
+          },
+          {
+            path: '/v2/report/daily_sales_detail',
+            name: 'dailySalesDetail', //每日销售明细
+            component: './Report/DailyDetail',
+            icon: 'file-text',
+          },
+        ],
+      },
+      // 一级页面（无二级类目），单都是主页面点击嵌套页面
+      {
+        path: '/v2/plan_manage',
+        redirect: '/v2/plan_manage/list',
+      },
+      {
+        path: '/v2/plan_manage',
+        name: 'planToday', //今日团购计划配置
+        icon: 'tags',
+        routes: [
+          {
+            path: '/v2/plan_manage/list',
+            name: 'list', //计划列表
+            component: './PlanManage/list',
+            hideInMenu: true,
+          },
+          {
+            path: '/v2/plan_manage/category/:id',
+            name: 'category', //类目展示
+            component: './PlanManage/categoryFloor',
+            hideInMenu: true,
+          }
+          
+        ],
+      },
+      {
+        path: '/v2/exception/403',
+        component: './Exception/403',
+      },
+      {
+        path: '/v2/exception/500',
+        component: './Exception/500',
+      },
+      {
+        component: '404',
+      },
+    ],
+  },
+];
+
+```
+
+
+
+#### 权限路由
+
+##### 原理
+
+- 官方栗子：点击登录=>dispatch`login/login` =>`fakeAccountLogin:返回用户角色admin|user` <= `login/login 中触发reduers中 setAuthority(payload.currentAuthority)`
+
+  注意：除了返回用户角色字符串"admin" 也可以返回菜单权限数组[1, 2, 3]
+
+  ![](E:\self\记录\myNotes\images\umi_8.png)
+
+  ![](E:\self\记录\myNotes\images\umi_9.png)
+
+  
+
+
+
+### 登录
+
+#### 内网访问
+
+```
+// http-p.js
+case 401:
+          //未登录
+          location.href =
+            'https://ssa.jd.com/sso/login?returnUrl=' + encodeURIComponent(location.href);
+          err.message = codeMessage['401'];
+          break;
+```
+
+#### 外网访问
+
+```
+// http-p.js
+case 401:
+          //未登录
+          location.href = '//passport.jd.com/new/login.aspx?ReturnUrl=' + encodeURIComponent(location.href);
+          err.message = codeMessage['401'];
+          break;
+```
+
+### 主题
+
+[ 官网 ](https://v2-pro.ant.design/index-cn)
+
+![](E:\self\记录\myNotes\rn\react_4.png)
+
+![](E:\self\记录\myNotes\rn\react_5.png)
+
+<img src="E:\self\记录\myNotes\rn\react_6.png" style="zoom: 67%;" />
+
+
+
+# 🐱第1次添加业务界面
+
+有无欢迎页面：(即输入win.jd.com 回车=>自动跳转win.jd.com/welcome)
+
+## 有欢迎页面
+
+欢迎页
+
+- 未登录时，欢迎页面里的接口不要被封装的公共请求拦截（拦截到会自动跳转到登录页）
+
+## 无欢迎页面
+
+# 🐱第2,...次添加业务界面
 
 ## 新建路由
 

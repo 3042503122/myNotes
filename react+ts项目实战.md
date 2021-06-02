@@ -44,7 +44,7 @@ npm run start
 
 
 
-#### 区分环境
+### 区分环境
 
 开发环境，测试环境，预生产环境，生产环境，很多配置项（比如打包publicPath静态资源路径、接口地址）都是不同的，这时候我们需要根据环境来决定配置项。
  create-react-app 默认支持`development`，`test`，`production`，这里的 `test` 是用来做代码测试的，并不是构建测试环境的，我们需要多种打包环境。
@@ -85,14 +85,6 @@ npm run eject
 - 定义全局变量 - 最近更新时间
 
   ```
-  
-  ```
-
-  
-
-- 定义全局变量 - 点击header-logo跳转首页
-
-  ```
   // webpack.config.js
   const moment = require('moment');
   
@@ -108,7 +100,30 @@ npm run eject
   declare const UPDATE_TIME: string;
   ```
 
+  ```
+  // App.tsx
+  <div>最近更新时间：{UPDATE_TIME}</div>
+  ```
+
   
+
+- 定义全局变量 - 点击header-logo跳转首页
+
+  ```
+  // webpack.config.js
+  const moment = require('moment');
+  
+        new webpack.DefinePlugin({
+          ...env.stringified,
+          SITE: JSON.stringify('hahaha')
+        }),
+  ```
+```
+  // react-app-env.d.ts
+  declare const SITE: string;
+```
+
+
 
 ### 路由router.config.js
 
