@@ -972,7 +972,6 @@ class Child extends PureComponent {
       - `url`: Must be of type `url`.
       - `hex`: Must be of type `hex`.
     - 【正则表达式校验】pattern
-    
   
   ​          手机号：` /^1[3-9][0-9]{9}$/`
   

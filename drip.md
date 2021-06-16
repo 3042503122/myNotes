@@ -5,3 +5,6 @@
 [官网](http://drip.jd.com/demo/index.html#/)
 
 [共建](http://ihub-dev.jd.com/index.html#/)
+
+[基于 React 和 JsonSchema 的动态表单解决方案](http://drip.jd.com/drip-form/docs/start/uiSchema)
+

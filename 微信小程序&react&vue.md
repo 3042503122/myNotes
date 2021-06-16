@@ -495,7 +495,7 @@ export default {
 
 
 
-## antdpro(react)
+## dva(antdpro)
 
 ### services
 

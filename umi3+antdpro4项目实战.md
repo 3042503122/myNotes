@@ -1,10 +1,20 @@
 [表情选择](https://www.process.st/emoji-in-business-documents/)
 
+举个 🌰
+
 # 前言
 
 使用umi2和antd pro4从零实现后台管理系统
 
+## 有欢迎页面
+
+![](E:\self\记录\myNotes\images\umi_11.png)
+
+## 无欢迎页面
+
 <img src="E:\self\记录\myWork\images\umi_2.png" style="zoom: 50%;" />
+
+
 
 # ✨技术栈
 
@@ -57,7 +67,9 @@ npm run start
 
 无
 
-### 区分环境
+### 环境配置
+
+不同环境中往往使用不同的域名、接口地址，可以通过统一配置在运行时读取配置。
 
 - publicPath
 
@@ -204,7 +216,9 @@ export default [
 
   ![](E:\self\记录\myNotes\images\umi_9.png)
 
-  
+- 厂商平台
+
+  ![](E:\self\记录\myNotes\images\umi_10.png)
 
 
 
